@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux"; //! +++
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import * as bookShelfAPI from 'services/bookshelf-api';
+// import { getTrendingAllDay } from "fakeAPI";
+
 import { nanoid } from 'nanoid'; 
 
 
 import {
-  addLocalStorageContacts, 
+  addLocalStorageContacts,
+  addItemsFromfetch,
   addContact,
   deleteContact
 } from 'redux/itemsSlice'; 
@@ -37,6 +41,22 @@ export const App = () => {
   const filter = useSelector(state => state.contacts.filter);
 
 
+  //! Делаем запрос на 'http://localhost:4040/contacts/items'
+  // useEffect(() => {
+  //   bookShelfAPI.fetchItems()
+  //     .then((items) => {
+  //       console.log(items);
+  //       // localStorage.setItem("contacts", JSON.stringify(items))
+  //       dispatch(addItems({items}));
+  //     })
+  //     .catch(error => {
+  //       console.log(error.message); //!
+  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+  //     });
+  //   // dispatch(addItems({items}));
+  // }, [dispatch]);
+
+
 
   //? Добавление contacts из LocalStorage ==> уже не надо с кнопкой из LocalStorage
   // useEffect(() => {
@@ -53,10 +73,33 @@ export const App = () => {
   // const localStoragePersistItems = JSON.parse(localStorage.getItem("persist:items")) ?? [];
   // console.log(JSON.parse(localStoragePersistItems.items)); //!
 
+
+
+
   //* Добавление contacts с помощью кнопки из LocalStorage with redux-persist
   const AddAllContactsFromLocalStorage = () => {
-      dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
-  }
+    dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: [] }));
+  };
+
+
+
+
+//* Добавление contacts с помощью запроса на 'http://localhost:4040/contacts/items'
+  const AddAllContactsFromfetchItems = () => {
+    //! Делаем запрос на 'http://localhost:4040/contacts/items'
+    bookShelfAPI.fetchItems()
+      .then((items) => {
+        // console.log("App ==> items:", items); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
+        dispatch(addItemsFromfetch({ items }));
+      })
+      .catch(error => {
+        console.log(error.message); //!
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+      });
+  };
+
+
 
 
   //! Принимаем (name, number) из ContactForm
@@ -124,6 +167,14 @@ export const App = () => {
           visibleContacts={visibleContacts}
           onDeleteTodo={deleteTodo}
         />
+
+        <button type="button"
+          onClick={AddAllContactsFromfetchItems}
+        >
+          Делаем запрос на 'http://localhost:4040/
+        </button>
+
+        <br></br>
 
         <button type="button"
           onClick={AddAllContactsFromLocalStorage}

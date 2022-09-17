@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { nanoid } from 'nanoid';
+
+
+
 
 
 const initialItems = [];
+
 //* +++++++++++++++++++++ itemsSlice +++++++++++++++++++++
-
-
 export const itemsSlice = createSlice({
     name: 'items',
     initialState: initialItems,
@@ -13,11 +16,27 @@ export const itemsSlice = createSlice({
         //? уже не надо с redux-persist
         addLocalStorageContacts(state, { payload }) {
             const localStorageContacts = JSON.parse(localStorage.getItem(payload.key)) ?? payload.defaultValue;
-            return localStorageContacts; //? уже не надо с redux-persist
+            // return localStorageContacts; //? уже не надо с redux-persist
+            return [...state, ...localStorageContacts]; //? уже не надо с redux-persist
             // console.log(localStorageContacts.items); //* with redux-persist
             // return JSON.parse(localStorageContacts.items); //* with redux-persist
             // if (localStorageContacts.items === undefined) return []; //* with redux-persist
             // return JSON.parse(localStorageContacts.items); //* with redux-persist
+        },
+
+        addItemsFromfetch(state, { payload }) {
+            const newIdItems = payload.items.map(item => {
+                return {
+                    id: nanoid(),
+                    name: item.name,
+                    number: item.number
+                };
+            });
+            // console.log("newIdItems:", newIdItems); //!
+            // const fetchItems = [...state, ...payload.items];
+            const fetchItems = [...state, ...newIdItems];
+            localStorage.setItem("contacts", JSON.stringify(fetchItems)) //? уже не надо с redux-persist
+            return fetchItems;
         },
 
         addContact(state, { payload }) {
@@ -40,5 +59,5 @@ export const itemsSlice = createSlice({
     }
 });
 
-export const { addLocalStorageContacts, addContact, deleteContact } = itemsSlice.actions;
+export const { addLocalStorageContacts, addItemsFromfetch, addContact, deleteContact } = itemsSlice.actions;
 // export const { addContact, deleteContact } = itemsSlice.actions; 

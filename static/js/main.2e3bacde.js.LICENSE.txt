@@ -90,11 +90,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+//!
+
 //! +++++++ Хук useDispatch +++++++++++++
 
 //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
 
 //! useState ===> name (аналог this.state.name)
+
+//! Делаем запрос на 'http://localhost:4040/contacts/items'
 
 //! Передача значений State (name, number) в App
 

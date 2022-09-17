@@ -38,10 +38,11 @@ export const App = () => {
 
 
 
-  //? Добавление contacts из LocalStorage ==> уже не кнопкой из LocalStorage
+  //? Добавление contacts из LocalStorage ==> уже не надо с кнопкой из LocalStorage
   // useEffect(() => {
   //   dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
   // }, [dispatch]);
+
 
   //? уже не надо с redux-persist
   //! Добавление contacts из LocalStorage with redux-persist

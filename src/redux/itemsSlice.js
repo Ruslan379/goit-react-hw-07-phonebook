@@ -11,13 +11,13 @@ export const itemsSlice = createSlice({
     initialState: initialItems,
     reducers: {
         //? уже не надо с redux-persist
-        // addLocalStorageContacts(state, { payload }) {
-        //     const localStorageContacts = JSON.parse(localStorage.getItem(payload.key)) ?? payload.defaultValue;
-        //     // return localStorageContacts; //? уже не надо с redux-persist
-        //     // console.log(localStorageContacts.items); //!
-        //     if (localStorageContacts.items === undefined) return []; //? with redux-persist
-        //     return JSON.parse(localStorageContacts.items); //? with redux-persist
-        // },
+        addLocalStorageContacts(state, { payload }) {
+            const localStorageContacts = JSON.parse(localStorage.getItem(payload.key)) ?? payload.defaultValue;
+            return localStorageContacts; //? уже не надо с redux-persist
+            // console.log(localStorageContacts.items); //!
+            // if (localStorageContacts.items === undefined) return []; //? with redux-persist
+            // return JSON.parse(localStorageContacts.items); //? with redux-persist
+        },
 
         addContact(state, { payload }) {
             const contact = {
@@ -26,18 +26,18 @@ export const itemsSlice = createSlice({
                 number: payload.number,
             };
             const localStorageAddContacts = [...state, contact]
-            // localStorage.setItem("contacts", JSON.stringify(localStorageAddContacts)) //? уже не надо с redux-persist
+            localStorage.setItem("contacts", JSON.stringify(localStorageAddContacts)) //? уже не надо с redux-persist
             return localStorageAddContacts;
         },
 
         deleteContact(state, { payload }) {
             const id = payload.contactId;
             const newContact = state.filter(contact => contact.id !== id)
-            // localStorage.setItem("contacts", JSON.stringify(newContact)) //? уже не надо с redux-persist
+            localStorage.setItem("contacts", JSON.stringify(newContact)) //? уже не надо с redux-persist
             return newContact;
         },
     }
 });
 
-// export const { addLocalStorageContacts, addContact, deleteContact } = itemsSlice.actions; //? уже не надо с redux-persist
-export const { addContact, deleteContact } = itemsSlice.actions; 
+export const { addLocalStorageContacts, addContact, deleteContact } = itemsSlice.actions;
+// export const { addContact, deleteContact } = itemsSlice.actions; 

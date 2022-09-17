@@ -4,25 +4,22 @@ import { combineReducers } from 'redux';
 import { itemsSlice } from 'redux/itemsSlice';
 import { filterSlice } from 'redux/filterSlice';
 
-//! +++++++++++++++++++++++++++++++ redux-persist +++++++++++++++++++++++++++++++
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import {
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from 'redux-persist'
 
+//! +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
+// const initialItems = []; //* Перенесен в 'redux/itemsSlice';
+// const initialFilter = "";  //* Перенесен в 'redux/itemsSlice';
 
-const persistConfig = {
-    key: 'items',
-    storage,
-    whitelist: ['items']
-}
-//! _______________________________ redux-persist _______________________________
+//! Модель (проэктирование) State
+// const allState = {
+//     contacts: {
+//         items: initialItems,
+//         filter: initialFilter
+//     }
+// };
+
+//! itemsSlice ==> Перенесен в 'redux/itemsSlice';
+
+//! filterSlice ==> Перенесен в 'redux/filterSlice';
 
 
 //! With createSlice
@@ -31,40 +28,14 @@ const rootReducer = combineReducers({
     filter: filterSlice.reducer
 });
 
-
-
-//! +++++++++++ persistedItemsReducer with redux-persist +++++++++++++++
-const persistedItemsReducer = persistReducer(persistConfig, rootReducer);
-
-
-
-//? +++++++++++ store +++++++++++++++
-// export const store = configureStore({
-//     reducer: {
-//         contacts: rootReducer
-//     },
-// });
-
-//! +++++++++++ store with redux-persist +++++++++++++++
+//! +++++++++++ store +++++++++++++++
 export const store = configureStore({
     reducer: {
-        contacts: persistedItemsReducer
+        contacts: rootReducer
     },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
 });
-
-
-//! +++++++++++ with redux-persist +++++++++++++++
-export const persistor = persistStore(store)
-
 
 
 //! ++++++++++++++++++++++++++++ ВЕСЬ State +++++++++++++++++++++++++++++++++++
 // console.log("ВЕСЬ State из App store.js ==> store.getState():", store.getState()); //!
 //! ____________________________________________________________________________
-

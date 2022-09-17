@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 
 
 import {
-  // addLocalStorageContacts, //? уже не надо с redux-persist
+  addLocalStorageContacts, 
   addContact,
   deleteContact
 } from 'redux/itemsSlice'; 
@@ -38,7 +38,7 @@ export const App = () => {
 
 
 
-  //? Добавление contacts из LocalStorage ==> уже не надо с redux-persist
+  //? Добавление contacts из LocalStorage ==> уже не кнопкой из LocalStorage
   // useEffect(() => {
   //   dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
   // }, [dispatch]);
@@ -53,9 +53,9 @@ export const App = () => {
   // console.log(JSON.parse(localStoragePersistItems.items)); //!
 
   //* Добавление contacts с помощью кнопки из LocalStorage with redux-persist
-  // const AddAllContactsFromLocalStorage = () => {
-  //     dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
-  // }
+  const AddAllContactsFromLocalStorage = () => {
+      dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
+  }
 
 
   //! Принимаем (name, number) из ContactForm
@@ -125,7 +125,7 @@ export const App = () => {
         />
 
         <button type="button"
-          // onClick={AddAllContactsFromLocalStorage}
+          onClick={AddAllContactsFromLocalStorage}
         >
           Add ALL contacts from LocalStorage
         </button>

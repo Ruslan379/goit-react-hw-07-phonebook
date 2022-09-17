@@ -90,22 +90,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//!  Добавление контакта в Действия (actions) ==> 
-
 //! +++++++ Хук useDispatch +++++++++++++
 
 //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
 
-//! alert с предупреждением о наявности контакта
-
 //! useState ===> name (аналог this.state.name)
 
-//! Добавление contacts из LocalStorage with redux-persist
-
 //! Передача значений State (name, number) в App
-
-//! Принимаем (name, number) из ContactForm
-
-//! запись значения из input-(Find contacts by name) в filter
 
 //! читает данные из state Redux-хранилища и подписывается на их обновление

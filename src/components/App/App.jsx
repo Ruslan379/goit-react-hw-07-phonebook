@@ -106,7 +106,7 @@ export const App = () => {
       <Container>
         <ToastContainer autoClose={1000} />
 
-        <h1>Phonebook (HW-6)</h1>
+        <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with ...)</span></h1>
 
         <ContactForm onSubmit={formSubmitHandler} />
 

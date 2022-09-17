@@ -1,4 +1,4 @@
-import { useEffect } from 'react'; //! +++
+// import { useEffect } from 'react'; //! +++
 import { useDispatch, useSelector } from "react-redux"; //! +++
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 
 
 import {
-  addLocalStorageContacts,
+  // addLocalStorageContacts,
   addContact,
   deleteContact
 } from 'redux/itemsSlice'; 
@@ -44,14 +44,17 @@ export const App = () => {
   // }, [dispatch]);
 
   //! Добавление contacts из LocalStorage with redux-persist
-  useEffect(() => {
-    dispatch(addLocalStorageContacts({ key: "persist:items", defaultValue: []}));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(addLocalStorageContacts({ key: "persist:items", defaultValue: []}));
+  // }, [dispatch]);
 
   // const localStoragePersistItems = JSON.parse(localStorage.getItem("persist:items")) ?? [];
   // console.log(JSON.parse(localStoragePersistItems.items)); //!
 
-
+  //* Добавление contacts с помощью кнопки из LocalStorage with redux-persist
+  // const AddAllContactsFromLocalStorage = () => {
+  //     dispatch(addLocalStorageContacts({ key: "persist:items", defaultValue: [] }));
+  // }
 
 
   //! Принимаем (name, number) из ContactForm
@@ -119,6 +122,12 @@ export const App = () => {
           visibleContacts={visibleContacts}
           onDeleteTodo={deleteTodo}
         />
+
+        <button type="button"
+          // onClick={AddAllContactsFromLocalStorage}
+        >
+          Add ALL contacts from LocalStorage
+        </button>
       </Container>
     );
   }

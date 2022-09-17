@@ -10,14 +10,13 @@ export const itemsSlice = createSlice({
     name: 'items',
     initialState: initialItems,
     reducers: {
-        addLocalStorageContacts(state, { payload }) {
-            const localStorageContacts = JSON.parse(localStorage.getItem(payload.key)) ?? payload.defaultValue;
-            // return localStorageContacts; //? уже не надо с redux-persist
-            // console.log(localStorageContacts.items); //!
-            if (localStorageContacts.items === undefined) return []; //? with redux-persist
-            return JSON.parse(localStorageContacts.items); //? with redux-persist
-
-        },
+        // addLocalStorageContacts(state, { payload }) {
+        //     const localStorageContacts = JSON.parse(localStorage.getItem(payload.key)) ?? payload.defaultValue;
+        //     // return localStorageContacts; //? уже не надо с redux-persist
+        //     // console.log(localStorageContacts.items); //!
+        //     if (localStorageContacts.items === undefined) return []; //? with redux-persist
+        //     return JSON.parse(localStorageContacts.items); //? with redux-persist
+        // },
 
         addContact(state, { payload }) {
             const contact = {

@@ -32,7 +32,16 @@ export async function fetchBookById(bookId) {
 // console.log(fetchContacts); //!
 //! ++++++++++++++++++
 
+
+//!  'http://localhost:4040/contacts.items'
+// export async function fetchItems() {
+//   const { data } = await axios.get(`/contacts`);
+//   return data.items;
+// };
+
+
+//!  'http://localhost:4040/items'
 export async function fetchItems() {
-  const { data } = await axios.get(`/contacts`);
-  return data.items;
+  const { data } = await axios.get(`/items`);
+  return data;
 }

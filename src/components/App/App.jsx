@@ -174,7 +174,8 @@ export const App = () => {
           Делаем запрос на 'http://localhost:4040/
         </button>
 
-        <br></br>
+        {/* <br></br> */}
+        <br/>
 
         <button type="button"
           onClick={AddAllContactsFromLocalStorage}

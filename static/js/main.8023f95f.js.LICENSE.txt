@@ -100,7 +100,7 @@
 
 //! Делаем запрос на 'http://localhost:4040/contacts/items'
 
-//! Передача значений State (name, number) в App
+//! Передача значений State (name, phone) в App
 
 //! для генерации своего id:  уже не надо
 

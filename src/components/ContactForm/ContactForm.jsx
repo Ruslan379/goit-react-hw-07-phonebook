@@ -12,8 +12,8 @@ import css from 'components/ContactForm/ContactForm.module.css'
 export const ContactForm = ({ onSubmit }) => {
   //! useState ===> name (аналог this.state.name)
   const [name, setName] = useState('');
-  //! useState ===> number (аналог this.state.number)
-  const [number, setNumber] = useState('');
+  //! useState ===> phone (аналог this.state.phone)
+  const [phone, setPhone] = useState('');
 
 
   const contactInputId = nanoid();
@@ -29,8 +29,8 @@ export const ContactForm = ({ onSubmit }) => {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -43,7 +43,7 @@ export const ContactForm = ({ onSubmit }) => {
   //! Очистка полей ФОРМЫ
     const reset = () => {
       setName('');
-      setNumber('');
+      setPhone('');
   };
 
 
@@ -51,10 +51,10 @@ export const ContactForm = ({ onSubmit }) => {
   //! NEW - Submit ФОРМЫ
   const handleSubmit = event => {
     event.preventDefault();
-    //! Передача значений State (name, number) в App
-      //* Здесь, вероятно, можно сделать ==> dispatch(addContact({id: nanoid(), name, number}));
-      //* вместо ==> onSubmit(name, number);
-    onSubmit(name, number);
+    //! Передача значений State (name, phone) в App
+      //* Здесь, вероятно, можно сделать ==> dispatch(addContact({id: nanoid(), name, phone}));
+      //* вместо ==> onSubmit(name, phone);
+    onSubmit(name, phone);
     reset(); 
   };
 
@@ -91,16 +91,16 @@ export const ContactForm = ({ onSubmit }) => {
           className={css.FormLabel}
           htmlFor={contactInputId}
         >
-            Number
+            Phone
             <br />
             <input
               className={css.FormInput}
               type="tel"
-              name="number"
+              name="phone"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
-              value={number}
+              value={phone}
               onChange={handleChange}
               id={contactInputId}
             />

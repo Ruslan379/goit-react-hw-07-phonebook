@@ -8,7 +8,7 @@ import css from 'components/ContactList/ContactList.module.css'
 
 export const ContactList = ({ visibleContacts, onDeleteTodo }) => (
   <ul className={css.ContactList}>
-    {visibleContacts.map(({ id, name, number }) => (
+    {visibleContacts.map(({ id, name, phone }) => (
       <li
         key={id}
         className={css.ContactListItem}
@@ -17,7 +17,7 @@ export const ContactList = ({ visibleContacts, onDeleteTodo }) => (
           className={css.ContactListText}>{name}:
           <span
             className={css.ContactListNumber}
-          > {number}
+          > {phone}
           </span>
         </p>
         <button

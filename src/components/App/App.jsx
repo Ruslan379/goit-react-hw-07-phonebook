@@ -102,15 +102,15 @@ export const App = () => {
 
 
 
-  //! Принимаем (name, number) из ContactForm
+  //! Принимаем (name, phone) из ContactForm
   //! alert с предупреждением о наявности контакта
   //!  Добавление контакта в Действия (actions) ==> 
-  const formSubmitHandler = (name, number) => {
+  const formSubmitHandler = (name, phone) => {
     if (contacts.find(item => item.name.toLowerCase() === name.toLowerCase())) {
       toast.warning(`${name} уже есть в контактах.`); 
       return;
     } else {
-      dispatch(addContact({id: nanoid(), name, number}));
+      dispatch(addContact({id: nanoid(), name, phone}));
       }
   };
 

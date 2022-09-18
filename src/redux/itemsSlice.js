@@ -29,7 +29,7 @@ export const itemsSlice = createSlice({
         //         return {
         //             id: nanoid(),
         //             name: item.name,
-        //             number: item.number
+        //             phone: item.phone
         //         };
         //     });
         //     // console.log("newIdItems:", newIdItems); //!
@@ -52,7 +52,7 @@ export const itemsSlice = createSlice({
             const contact = {
                 id: payload.id,
                 name: payload.name,
-                number: payload.number,
+                phone: payload.phone,
             };
             const localStorageAddContacts = [...state, contact]
             localStorage.setItem("contacts", JSON.stringify(localStorageAddContacts)) //? уже не надо с redux-persist

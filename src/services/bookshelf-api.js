@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4040';
+// axios.defaults.baseURL = 'http://localhost:4040'; //! OLD
+axios.defaults.baseURL = 'https://6326c1ee70c3fa390f9bc51d.mockapi.io';
 
 
 export async function fetchAuthors() {
@@ -41,7 +42,13 @@ export async function fetchBookById(bookId) {
 
 
 //!  'http://localhost:4040/items'
+// export async function fetchItems() {
+//   const { data } = await axios.get(`/items`);
+//   return data;
+// };
+
+//!  'https://6326c1ee70c3fa390f9bc51d.mockapi.io/contacts'
 export async function fetchItems() {
-  const { data } = await axios.get(`/items`);
+  const { data } = await axios.get(`/contacts`);
   return data;
 }

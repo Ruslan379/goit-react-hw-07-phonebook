@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid'; //? уже не надо
 
 
 
@@ -23,18 +23,27 @@ export const itemsSlice = createSlice({
             // if (localStorageContacts.items === undefined) return []; //* with redux-persist
             // return JSON.parse(localStorageContacts.items); //* with redux-persist
         },
+        //! для генерации своего id:  уже не надо
+        // addItemsFromfetch(state, { payload }) {
+        //     const newIdItems = payload.items.map(item => {
+        //         return {
+        //             id: nanoid(),
+        //             name: item.name,
+        //             number: item.number
+        //         };
+        //     });
+        //     // console.log("newIdItems:", newIdItems); //!
+        //     // const fetchItems = [...state, ...payload.items];
+        //     const fetchItems = [...state, ...newIdItems];
+        //     localStorage.setItem("contacts", JSON.stringify(fetchItems)) //? уже не надо с redux-persist
+        //     return fetchItems;
+        // },
 
         addItemsFromfetch(state, { payload }) {
-            const newIdItems = payload.items.map(item => {
-                return {
-                    id: nanoid(),
-                    name: item.name,
-                    number: item.number
-                };
-            });
+
             // console.log("newIdItems:", newIdItems); //!
-            // const fetchItems = [...state, ...payload.items];
-            const fetchItems = [...state, ...newIdItems];
+            const fetchItems = [...state, ...payload.items];
+            // const fetchItems = [...state, ...newIdItems];
             localStorage.setItem("contacts", JSON.stringify(fetchItems)) //? уже не надо с redux-persist
             return fetchItems;
         },

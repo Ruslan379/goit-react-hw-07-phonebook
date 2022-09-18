@@ -171,7 +171,8 @@ export const App = () => {
         <button type="button"
           onClick={AddAllContactsFromfetchItems}
         >
-          Делаем запрос на 'http://localhost:4040/
+          {/* Делаем запрос на http://localhost:4040/ */}
+          ADD contacts from https://mockapi.io/
         </button>
 
         {/* <br></br> */}

@@ -129,10 +129,10 @@ export const App = () => {
       const addNewContact = { name, phone };
       //! Делаем запрос на добавление контакта'
     contactsAPI.axiosPostAddContact(addNewContact)
-      .then((items) => {
-        console.log("App-axiosPost ==> items:", items); //!
+      .then((addItems) => {
+        console.log("App-axiosPost ==> addItems:", addItems); //!
         // localStorage.setItem("contacts", JSON.stringify(items))
-        dispatch(addContact(items));
+        dispatch(addContact(addItems));
       })
       .catch(error => {
         console.log(error.message); //!
@@ -164,7 +164,18 @@ export const App = () => {
 
   //! Создание нового массива объектов из this.state.contacts с учетом удаления контакта по его contact.id
   const deleteTodo = contactId => {
-    dispatch(deleteContact({contactId}));
+    //! Делаем запрос на УДАЛЕНИЕ контакта'
+    contactsAPI.axiosDeleteContact(contactId)
+      .then((deleteItems) => {
+        console.log("App-axiosDelete ==> deleteItems:", deleteItems); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
+        dispatch(deleteContact({contactId}));
+      })
+      .catch(error => {
+        console.log(error.message); //!
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+      });
+    
   };
 
 

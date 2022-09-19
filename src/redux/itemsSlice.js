@@ -52,12 +52,13 @@ export const itemsSlice = createSlice({
         addContactsFromAxios(state, { payload }) {
             const newIdItems = payload.items.map(item => {
                 return {
-                    id: item.createdAt,
+                    // id: item.createdAt, //?
+                    id: item.id,
                     name: item.name,
                     phone: item.phone
                 };
             });
-            console.log("newIdItems:", newIdItems); //!
+            console.log("newIdItems:", newIdItems);
             // const fetchItems = [...state, ...payload.items];
             // const fetchItems = [...state, ...newIdItems];
             return newIdItems;
@@ -65,7 +66,8 @@ export const itemsSlice = createSlice({
 
         addContact(state, { payload }) {
             const contact = {
-                id: payload.createdAt,
+                // id: payload.createdAt, //?
+                id: payload.id,
                 name: payload.name,
                 phone: payload.phone,
             };
@@ -76,6 +78,7 @@ export const itemsSlice = createSlice({
 
         deleteContact(state, { payload }) {
             const id = payload.contactId;
+            console.log("deleteContact ==> id", id); //!
             const newContact = state.filter(contact => contact.id !== id)
             localStorage.setItem("contacts", JSON.stringify(newContact)) //? Добавление contacts в LocalStorage
             return newContact;

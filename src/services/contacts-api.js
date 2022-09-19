@@ -9,11 +9,15 @@ export async function axiosGetAddAllContacts() {
   return data;
 };
 
-export async function axiosPostAddContact(values) {
-  const { data } = await axios.post('/contacts', values);
+export async function axiosPostAddContact(contact) {
+  const { data } = await axios.post('/contacts', contact);
   return data;
 };
 
+export async function axiosDeleteContact(id) {
+  const { data } = await axios.delete(`/contacts/${id}`);
+  return data;
+};
 
 //! ++++++++++++++++++
 // const BASE_URL = 'http://localhost:4040';

@@ -30,7 +30,7 @@ export const itemsSlice = createSlice({
         //         return {
         //             id: nanoid(),
         //             name: item.name,
-        //             phone: item.phone
+        //             number: item.phone
         //         };
         //     });
         //     // console.log("newIdItems:", newIdItems); //!
@@ -55,7 +55,7 @@ export const itemsSlice = createSlice({
                     // id: item.createdAt, //?
                     id: item.id,
                     name: item.name,
-                    phone: item.phone
+                    number: item.phone
                 };
             });
             console.log("addContactsFromAxios ==> newIdItems:", newIdItems); //!
@@ -69,7 +69,7 @@ export const itemsSlice = createSlice({
                 // id: payload.createdAt, //?
                 id: payload.id,
                 name: payload.name,
-                phone: payload.phone,
+                number: payload.phone,
             };
             console.log("addContact ==> contact:", contact); //!
             const newContacts = [...state, contact]

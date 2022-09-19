@@ -57,15 +57,15 @@ export const App = () => {
 
 
 
-  //! Принимаем (name, phone) из ContactForm
+  //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
   //!  Добавление контакта в Действия (actions) ==> 
-  const formSubmitHandler = (name, phone) => {
+  const formSubmitHandler = (name, number) => {
     if (contacts.find(item => item.name.toLowerCase() === name.toLowerCase())) {
       toast.warning(`${name} уже есть в контактах.`); 
       return;
     } else {
-      const addNewContact = { name, phone };
+      const addNewContact = { name, phone: number };
       //! Делаем запрос на добавление контакта'
     contactsAPI.axiosPostAddContact(addNewContact)
       .then((addItems) => {
@@ -77,7 +77,7 @@ export const App = () => {
         console.log(error.message); //!
         toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
       });
-      // dispatch(addContact({id: nanoid(), name, phone})); //?
+      // dispatch(addContact({id: nanoid(), name, number})); //?
       }
   };
 

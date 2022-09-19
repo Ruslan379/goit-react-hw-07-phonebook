@@ -10,6 +10,7 @@ import * as contactsAPI from 'services/contacts-api';
 
 
 import {
+  // addLocalStorageContacts,
   addContactsFromAxios,
   addContact,
   deleteContact
@@ -45,6 +46,7 @@ export const App = () => {
     contactsAPI.axiosGetAddAllContacts()
       .then((items) => {
         console.log("App-axiosGet ==> items:", items); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
         dispatch(addContactsFromAxios({ items }));
       })
       .catch(error => {
@@ -68,6 +70,7 @@ export const App = () => {
     contactsAPI.axiosPostAddContact(addNewContact)
       .then((addItems) => {
         console.log("App-axiosPost ==> addItems:", addItems); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
         dispatch(addContact(addItems));
       })
       .catch(error => {
@@ -142,6 +145,21 @@ export const App = () => {
           visibleContacts={visibleContacts}
           onDeleteTodo={deleteTodo}
         />
+
+        {/* <button type="button"
+          onClick={AddAllContactsFromMockapi}
+        >
+          ADD contacts from https://mockapi.io/
+        </button> */}
+
+        {/* <br></br> */}
+        {/* <br/> */}
+
+        {/* <button type="button"
+          onClick={AddAllContactsFromLocalStorage}
+        >
+          Add ALL contacts from LocalStorage
+        </button> */}
       </Container>
     );
   }

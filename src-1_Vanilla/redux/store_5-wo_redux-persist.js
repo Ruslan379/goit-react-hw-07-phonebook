@@ -17,6 +17,9 @@ import { filterSlice } from 'redux/filterSlice';
 //     }
 // };
 
+//! itemsSlice ==> Перенесен в 'redux/itemsSlice';
+
+//! filterSlice ==> Перенесен в 'redux/filterSlice';
 
 
 //! With createSlice

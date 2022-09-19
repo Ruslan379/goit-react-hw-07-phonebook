@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // import { nanoid } from 'nanoid'; //? уже не надо
 
-import { addAllContactsFromMmockapiIo } from 'redux/itemsOperations'
+import {
+    addAllContactsFromMmockapiIo,
+    addOneContactToMmockapiIo,
+    deleteOneContactFromMmockapiIo
+} from 'redux/itemsOperations'
 
 
 
@@ -14,7 +18,7 @@ export const itemsSlice = createSlice({
     initialState: initialItems,
     extraReducers: {
         [addAllContactsFromMmockapiIo.fulfilled]: (state, { payload }) => {
-            const newIdItems = payload.items.map(item => {
+            const newIdItems = payload.map(item => {
                 return {
                     id: item.id,
                     name: item.name,
@@ -25,7 +29,7 @@ export const itemsSlice = createSlice({
             return newIdItems;
         },
 
-        addContact(state, { payload }) {
+        [addOneContactToMmockapiIo.fulfilled]: (state, { payload }) => {
             const contact = {
                 id: payload.id,
                 name: payload.name,
@@ -36,8 +40,8 @@ export const itemsSlice = createSlice({
             return newContacts;
         },
 
-        deleteContact(state, { payload }) {
-            const id = payload.contactId;
+        [deleteOneContactFromMmockapiIo.fulfilled]: (state, { payload }) => {
+            const id = payload;
             console.log("deleteContact ==> id", id); //!
             const newContact = state.filter(contact => contact.id !== id)
             return newContact;
@@ -45,4 +49,4 @@ export const itemsSlice = createSlice({
     }
 });
 
-export const { addContactsFromAxios, addContact, deleteContact } = itemsSlice.actions;
+// export const { addContactsFromAxios, addContact, deleteContact } = itemsSlice.actions; //? уже не надо

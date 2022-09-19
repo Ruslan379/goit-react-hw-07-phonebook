@@ -1,18 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as contactsAPI from 'services/mockapi_io-api';
 
-import {
-    // addContactsFromAxios,
-    addContact,
-    deleteContact
-} from 'redux/itemsSlice';
+//? уже не надо
+// import {
+//     addContactsFromAxios,
+//     addContact,
+//     deleteContact
+// } from 'redux/itemsSlice';
 
 
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify'; //? уже не надо
 
 
 
-//! Вариант Репеты с redux-thunk и async/await
+//? уже не надо
 // export const addAllContactsFromMmockapiIo = () => async dispatch => {
 //     try {
 //         const items = await contactsAPI.axiosGetAddAllContacts();
@@ -29,31 +30,58 @@ export const addAllContactsFromMmockapiIo = createAsyncThunk(
     'items/axiosGet',
     async () => {
         const items = await contactsAPI.axiosGetAddAllContacts();
-        return { items };
+        console.log("itemsOperations-axiosGet ==> items:", items); //!
+        return items;
     }
 );
 
-export const addOneContactToMmockapiIo = (addNewContact) => async dispatch => {
-    try {
-        const addItem = await contactsAPI.axiosPostAddContact(addNewContact)
+
+
+
+
+//? уже не надо
+// export const addOneContactToMmockapiIo1 = (addNewContact) => async dispatch => {
+//     try {
+//         const addItem = await contactsAPI.axiosPostAddContact(addNewContact);
+//         console.log("itemsOperations-axiosPost ==> addItem:", addItem); //!
+//         dispatch(addContact(addItem));
+//     } catch (error) {
+//         console.log(error);
+//         toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+//     }
+// };
+
+export const addOneContactToMmockapiIo = createAsyncThunk(
+    'items/axiosPost',
+    async (addNewContact) => {
+        const addItem = await contactsAPI.axiosPostAddContact(addNewContact);
         console.log("itemsOperations-axiosPost ==> addItem:", addItem); //!
-        dispatch(addContact(addItem));
-    } catch (error) {
-        console.log(error);
-        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+        return addItem;
     }
-};
+);
 
 
 
 
-export const deleteOneContactFromMmockapiIo = (contactId) => async dispatch => {
-    try {
-        const deleteItem = await contactsAPI.axiosDeleteContact(contactId)
+
+
+//? уже не надо
+// export const deleteOneContactFromMmockapiIo1 = (contactId) => async dispatch => {
+//     try {
+//         const deleteItem = await contactsAPI.axiosDeleteContact(contactId);
+//         console.log("itemsOperations-axiosDelete ==> deleteItem:", deleteItem); //!
+//         dispatch(deleteContact({ contactId }));
+//     } catch (error) {
+//         console.log(error);
+//         toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+//     }
+// };
+
+export const deleteOneContactFromMmockapiIo = createAsyncThunk(
+    'items/axiosDelete',
+    async (contactId) => {
+        const deleteItem = await contactsAPI.axiosDeleteContact(contactId);
         console.log("itemsOperations-axiosDelete ==> deleteItem:", deleteItem); //!
-        dispatch(deleteContact({ contactId }));
-    } catch (error) {
-        console.log(error);
-        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+        return contactId;
     }
-};
+);

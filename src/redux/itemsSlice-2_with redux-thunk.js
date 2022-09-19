@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // import { nanoid } from 'nanoid'; //? уже не надо
 
-import { addAllContactsFromMmockapiIo } from 'redux/itemsOperations'
+
 
 
 
@@ -12,8 +12,8 @@ const initialItems = [];
 export const itemsSlice = createSlice({
     name: 'items',
     initialState: initialItems,
-    extraReducers: {
-        [addAllContactsFromMmockapiIo.fulfilled]: (state, { payload }) => {
+    reducers: {
+        addContactsFromAxios(state, { payload }) {
             const newIdItems = payload.items.map(item => {
                 return {
                     id: item.id,

@@ -1,8 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as contactsAPI from 'services/mockapi_io-api';
 
 import {
-    // addContactsFromAxios,
+    addContactsFromAxios,
     addContact,
     deleteContact
 } from 'redux/itemsSlice';
@@ -13,25 +12,19 @@ import { toast } from 'react-toastify';
 
 
 //! Вариант Репеты с redux-thunk и async/await
-// export const addAllContactsFromMmockapiIo = () => async dispatch => {
-//     try {
-//         const items = await contactsAPI.axiosGetAddAllContacts();
-//         console.log("itemsOperations-axiosGet ==> items:", items); //!
-//         dispatch(addContactsFromAxios({ items }));
-//     } catch (error) {
-//         console.log(error);
-//         toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-//     }
-// };
-// // dispatch(addAllContactsFroMmockapiIo());
-
-export const addAllContactsFromMmockapiIo = createAsyncThunk(
-    'items/axiosGet',
-    async () => {
-        const items = await contactsAPI.axiosGetAddAllContacts();
-        return { items };
+export const addAllContactsFromMmockapiIo = () => async dispatch => {
+    try {
+        const items = await contactsAPI.axiosGetAddAllContacts()
+        console.log("itemsOperations-axiosGet ==> items:", items); //!
+        dispatch(addContactsFromAxios({ items }));
+    } catch (error) {
+        console.log(error);
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
     }
-);
+};
+// dispatch(addAllContactsFroMmockapiIo());
+
+
 
 export const addOneContactToMmockapiIo = (addNewContact) => async dispatch => {
     try {

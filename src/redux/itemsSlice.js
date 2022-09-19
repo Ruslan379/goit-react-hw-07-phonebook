@@ -17,7 +17,7 @@ export const itemsSlice = createSlice({
     name: 'items',
     initialState: initialItems,
     extraReducers: {
-        [addAllContactsFromMmockapiIo.fulfilled]: (state, { payload }) => {
+        [addAllContactsFromMmockapiIo.fulfilled]: (_, { payload }) => {
             const newIdItems = payload.map(item => {
                 return {
                     id: item.id,

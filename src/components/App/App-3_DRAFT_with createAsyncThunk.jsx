@@ -4,6 +4,16 @@ import { useDispatch, useSelector } from "react-redux"; //! +++
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// import * as contactsAPI from 'services/mockapi_io-api'; //? уже не надо
+
+// import { nanoid } from 'nanoid'; 
+
+//? уже не надо
+// import {
+//   addContactsFromAxios,
+//   addContact,
+//   deleteContact
+// } from 'redux/itemsSlice'; 
 
 import * as itemsOperations from 'redux/itemsOperations';
 // import { itemsOperations } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
@@ -42,16 +52,29 @@ export const App = () => {
 
 
 
+  //? Добавление ALL Contacts с помощью axios.get-запроса (МОЙ ВАРИАНТ)
+  //? Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
+  // useEffect(() => {
+  //   contactsAPI.axiosGetAddAllContacts()
+  //     .then((items) => {
+  //       console.log("App-axiosGet ==> items:", items); //!
+  //       dispatch(addContactsFromAxios({ items }));
+  //     })
+  //     .catch(error => {
+  //       console.log(error.message); //!
+  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+  //     });
+  // }, [dispatch]);
 
-  //! Добавление ALL Contacts с помощью axios.get-запроса 
+  //* Добавление ALL Contacts с помощью axios.get-запроса (Вариант РЕПЕТЫ с redux-thunk и async/await)
+  //! addAllContactsFroMmockapiIo ==> перенесен в itemsOperations
   // useEffect(() => dispatch(itemsOperations.addAllContactsFromMmockapiIo()), [dispatch]);  //! ТАК НЕ РАБОТАЕТ!!!
 
   useEffect(() => {
     dispatch(itemsOperations.addAllContactsFromMmockapiIo());
   }, [dispatch]);
-
-
-
+  
+  
 
   //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
@@ -62,11 +85,23 @@ export const App = () => {
       return;
     } else {
       const addNewContact = { name, phone: number };
-      //! Делаем запрос на добавление контакта из mockapi.io/contacts 
+      //* Делаем запрос на добавление контакта из mockapi.io/contacts (Вариант РЕПЕТЫ с redux-thunk и async/await):
       dispatch(itemsOperations.addOneContactToMmockapiIo(addNewContact));
+
+    //? Делаем запрос на добавление контакта из mockapi.io/contacts (МОЙ ВАРИАНТ)
+    // contactsAPI.axiosPostAddContact(addNewContact)
+    //   .then((addItem) => {
+    //     console.log("App-axiosPost ==> addItem:", addItem); //!
+    //     dispatch(addContact(addItem));
+    //   })
+    //   .catch(error => {
+    //     console.log(error.message); //!
+    //     toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+    //   });
+    //   // dispatch(addContact({id: nanoid(), name, number})); //?
+      
       }
   };
-
 
 
 
@@ -75,16 +110,6 @@ export const App = () => {
     const filterValue = event.currentTarget.value; 
     dispatch(changesFilter({filterValue}));
   };
-
-
-
-
-//! Создание нового массива объектов из this.state.contacts с учетом удаления контакта по его contact.id
-  const deleteTodo = contactId => {
-    //! Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts 
-    dispatch(itemsOperations.deleteOneContactFromMmockapiIo(contactId));
-  };
-
 
 
 
@@ -97,7 +122,30 @@ export const App = () => {
   };
 
 
-  
+
+  //! Создание нового массива объектов из this.state.contacts с учетом удаления контакта по его contact.id
+  const deleteTodo = contactId => {
+    //* Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts (Вариант РЕПЕТЫ с redux-thunk и async/await):
+    dispatch(itemsOperations.deleteOneContactFromMmockapiIo(contactId));
+
+
+
+    //? Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts (МОЙ ВАРИАНТ)
+    // contactsAPI.axiosDeleteContact(contactId)
+    //   .then((deleteItem) => {
+    //     console.log("App-axiosDelete ==> deleteItem:", deleteItem); //!
+    //     // localStorage.setItem("contacts", JSON.stringify(items))
+    //     dispatch(deleteContact({contactId}));
+    //   })
+    //   .catch(error => {
+    //     console.log(error.message); //!
+    //     toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+    //   });
+    
+  };
+
+
+
   const visibleContacts = getVisibleContacts();
   const totalContacts = contacts.length;
 
@@ -108,7 +156,7 @@ export const App = () => {
       <Container>
         <ToastContainer autoClose={1000} />
 
-        <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with createAsyncThunk)</span></h1>
+        <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with ...)</span></h1>
 
         <ContactForm onSubmit={formSubmitHandler} />
 

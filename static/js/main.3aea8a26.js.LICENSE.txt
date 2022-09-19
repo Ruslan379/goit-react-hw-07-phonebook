@@ -104,13 +104,11 @@
 
 //! useState ===> name (аналог this.state.name)
 
-//! Делаем запрос на 'http://localhost:4040/contacts/items'
+//! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
 
 //! Делаем запрос на УДАЛЕНИЕ контакта'
 
 //! Делаем запрос на добавление контакта'
-
-//! Добавление contacts из LocalStorage with redux-persist
 
 //! Передача значений State (name, phone) в App
 

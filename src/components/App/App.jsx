@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // import * as contactsAPI from 'services/mockapi_io-api'; //? уже не надо
-import * as itemsOperations from 'redux/itemsOperations';
 
 // import { nanoid } from 'nanoid'; 
 
@@ -15,6 +14,14 @@ import * as itemsOperations from 'redux/itemsOperations';
 //   addContact,
 //   deleteContact
 // } from 'redux/itemsSlice'; 
+
+import * as itemsOperations from 'redux/itemsOperations';
+// import { itemsOperations } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
+
+import { getContacts } from 'redux/itemsSelectors';
+import { getFilter } from 'redux/filterSelectors';
+
+// import { itemsSelectors, filterSelectors } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
 import { changesFilter } from 'redux/filterSlice'; 
 
@@ -36,8 +43,13 @@ export const App = () => {
 
   //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
   //! читает данные из state Redux-хранилища и подписывается на их обновление
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  // const contacts = useSelector(state => state.contacts.items);
+  // const contacts = useSelector(itemsSelectors.getContacts); //! ТАК НЕ РАБОТАЕТ с Re-export
+  const contacts = useSelector(getContacts);
+  // const filter = useSelector(state => state.contacts.filter);
+  // const filter = useSelector(filterSelectors.getFilter); //! ТАК НЕ РАБОТАЕТ с Re-export
+  const filter = useSelector(getFilter);
+
 
 
   //? Добавление ALL Contacts с помощью axios.get-запроса (МОЙ ВАРИАНТ)
@@ -56,6 +68,8 @@ export const App = () => {
 
   //* Добавление ALL Contacts с помощью axios.get-запроса (Вариант РЕПЕТЫ с redux-thunk и async/await)
   //! addAllContactsFroMmockapiIo ==> перенесен в itemsOperations
+  // useEffect(() => dispatch(itemsOperations.addAllContactsFromMmockapiIo()), [dispatch]);  //! ТАК НЕ РАБОТАЕТ!!!
+
   useEffect(() => {
     dispatch(itemsOperations.addAllContactsFromMmockapiIo());
   }, [dispatch]);
@@ -154,10 +168,13 @@ export const App = () => {
           onChange={changeFilter}
         />
         
-        <ContactList
-          visibleContacts={visibleContacts}
-          onDeleteTodo={deleteTodo}
-        />
+        {totalContacts > 0 && (
+          <ContactList
+            visibleContacts={visibleContacts}
+            onDeleteTodo={deleteTodo}
+          />
+        )}
+        
       </Container>
     );
   }

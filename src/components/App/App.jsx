@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from "react-redux"; //! +++
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import * as contactsAPI from 'services/mockapi_io-api';
+// import * as contactsAPI from 'services/mockapi_io-api'; //? уже не надо
 import * as itemsOperations from 'redux/itemsOperations';
 
 // import { nanoid } from 'nanoid'; 
 
-
-import {
-  // addContactsFromAxios,
-  addContact,
-  deleteContact
-} from 'redux/itemsSlice'; 
+//? уже не надо
+// import {
+//   addContactsFromAxios,
+//   addContact,
+//   deleteContact
+// } from 'redux/itemsSlice'; 
 
 import { changesFilter } from 'redux/filterSlice'; 
 
@@ -40,8 +40,8 @@ export const App = () => {
   const filter = useSelector(state => state.contacts.filter);
 
 
-  //* Добавление ALL Contacts с помощью axios.get-запроса (МОЙ ВАРИАНТ)
-  //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
+  //? Добавление ALL Contacts с помощью axios.get-запроса (МОЙ ВАРИАНТ)
+  //? Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
   // useEffect(() => {
   //   contactsAPI.axiosGetAddAllContacts()
   //     .then((items) => {
@@ -55,18 +55,12 @@ export const App = () => {
   // }, [dispatch]);
 
   //* Добавление ALL Contacts с помощью axios.get-запроса (Вариант РЕПЕТЫ с redux-thunk и async/await)
-  //! addAllContactsFroMmockapiIo ==> перенесен в contactsOperations
+  //! addAllContactsFroMmockapiIo ==> перенесен в itemsOperations
   useEffect(() => {
-    dispatch(itemsOperations.addAllContactsFroMmockapiIo());
+    dispatch(itemsOperations.addAllContactsFromMmockapiIo());
   }, [dispatch]);
   
   
-
-
-
-
-
-
 
   //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
@@ -77,17 +71,21 @@ export const App = () => {
       return;
     } else {
       const addNewContact = { name, phone: number };
-      //! Делаем запрос на добавление контакта'
-    contactsAPI.axiosPostAddContact(addNewContact)
-      .then((addItems) => {
-        console.log("App-axiosPost ==> addItems:", addItems); //!
-        dispatch(addContact(addItems));
-      })
-      .catch(error => {
-        console.log(error.message); //!
-        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-      });
-      // dispatch(addContact({id: nanoid(), name, number})); //?
+      //* Делаем запрос на добавление контакта из mockapi.io/contacts (Вариант РЕПЕТЫ с redux-thunk и async/await):
+      dispatch(itemsOperations.addOneContactToMmockapiIo(addNewContact));
+
+    //? Делаем запрос на добавление контакта из mockapi.io/contacts (МОЙ ВАРИАНТ)
+    // contactsAPI.axiosPostAddContact(addNewContact)
+    //   .then((addItem) => {
+    //     console.log("App-axiosPost ==> addItem:", addItem); //!
+    //     dispatch(addContact(addItem));
+    //   })
+    //   .catch(error => {
+    //     console.log(error.message); //!
+    //     toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+    //   });
+    //   // dispatch(addContact({id: nanoid(), name, number})); //?
+      
       }
   };
 
@@ -113,17 +111,22 @@ export const App = () => {
 
   //! Создание нового массива объектов из this.state.contacts с учетом удаления контакта по его contact.id
   const deleteTodo = contactId => {
-    //! Делаем запрос на УДАЛЕНИЕ контакта'
-    contactsAPI.axiosDeleteContact(contactId)
-      .then((deleteItems) => {
-        console.log("App-axiosDelete ==> deleteItems:", deleteItems); //!
-        // localStorage.setItem("contacts", JSON.stringify(items))
-        dispatch(deleteContact({contactId}));
-      })
-      .catch(error => {
-        console.log(error.message); //!
-        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-      });
+    //* Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts (Вариант РЕПЕТЫ с redux-thunk и async/await):
+    dispatch(itemsOperations.deleteOneContactFromMmockapiIo(contactId));
+
+
+
+    //? Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts (МОЙ ВАРИАНТ)
+    // contactsAPI.axiosDeleteContact(contactId)
+    //   .then((deleteItem) => {
+    //     console.log("App-axiosDelete ==> deleteItem:", deleteItem); //!
+    //     // localStorage.setItem("contacts", JSON.stringify(items))
+    //     dispatch(deleteContact({contactId}));
+    //   })
+    //   .catch(error => {
+    //     console.log(error.message); //!
+    //     toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+    //   });
     
   };
 

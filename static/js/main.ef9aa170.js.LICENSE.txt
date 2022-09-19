@@ -100,11 +100,15 @@
 
 //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
 
-//! addAllContactsFroMmockapiIo ==> перенесен в itemsOperations
-
 //! alert с предупреждением о наявности контакта
 
 //! useState ===> name (аналог this.state.name)
+
+//! Делаем запрос на УДАЛЕНИЕ контакта из mockapi.io/contacts 
+
+//! Делаем запрос на добавление контакта из mockapi.io/contacts 
+
+//! Добавление ALL Contacts с помощью axios.get-запроса 
 
 //! Передача значений State (name, number) в App
 

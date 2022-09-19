@@ -106,6 +106,8 @@
 
 //! Делаем запрос на 'http://localhost:4040/contacts/items'
 
+//! Делаем запрос на УДАЛЕНИЕ контакта'
+
 //! Делаем запрос на добавление контакта'
 
 //! Добавление contacts из LocalStorage with redux-persist

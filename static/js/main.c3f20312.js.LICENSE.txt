@@ -110,9 +110,9 @@
 
 //! Делаем запрос на добавление контакта'
 
-//! Передача значений State (name, phone) в App
+//! Передача значений State (name, number) в App
 
-//! Принимаем (name, phone) из ContactForm
+//! Принимаем (name, number) из ContactForm
 
 //! для генерации своего id:  уже не надо
 

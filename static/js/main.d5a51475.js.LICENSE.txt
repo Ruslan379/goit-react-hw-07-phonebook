@@ -100,9 +100,13 @@
 
 //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
 
+//! addAllContactsFroMmockapiIo ==> перенесен в contactsOperations
+
 //! alert с предупреждением о наявности контакта
 
 //! useState ===> name (аналог this.state.name)
+
+//! Вариант Репеты с redux-thunk и async/await
 
 //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
 

@@ -58,7 +58,7 @@ export const itemsSlice = createSlice({
                     phone: item.phone
                 };
             });
-            console.log("newIdItems:", newIdItems);
+            console.log("addContactsFromAxios ==> newIdItems:", newIdItems); //!
             // const fetchItems = [...state, ...payload.items];
             // const fetchItems = [...state, ...newIdItems];
             return newIdItems;
@@ -71,6 +71,7 @@ export const itemsSlice = createSlice({
                 name: payload.name,
                 phone: payload.phone,
             };
+            console.log("addContact ==> contact:", contact); //!
             const newContacts = [...state, contact]
             // localStorage.setItem("contacts", JSON.stringify(newContacts)) //? Добавление contacts в LocalStorage
             return newContacts;
@@ -80,7 +81,7 @@ export const itemsSlice = createSlice({
             const id = payload.contactId;
             console.log("deleteContact ==> id", id); //!
             const newContact = state.filter(contact => contact.id !== id)
-            localStorage.setItem("contacts", JSON.stringify(newContact)) //? Добавление contacts в LocalStorage
+            // localStorage.setItem("contacts", JSON.stringify(newContact)) //? Добавление contacts в LocalStorage
             return newContact;
         },
     }

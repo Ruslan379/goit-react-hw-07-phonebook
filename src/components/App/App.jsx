@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as contactsAPI from 'services/contacts-api';
-// import { getTrendingAllDay } from "fakeAPI";
 
 // import { nanoid } from 'nanoid'; 
 
@@ -41,8 +40,8 @@ export const App = () => {
   const filter = useSelector(state => state.contacts.filter);
 
 
-  //* Добавление contacts с помощью axios.get-запроса на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
-  //! Делаем запрос на 'http://localhost:4040/contacts/items'
+  //* Добавление ALL Contacts с помощью axios.get-запроса 
+  //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
   useEffect(() => {
     contactsAPI.axiosGetAddAllContacts()
       .then((items) => {
@@ -55,66 +54,6 @@ export const App = () => {
         toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
       });
   }, [dispatch]);
-
-
-
-  //! Делаем запрос на 'http://localhost:4040/contacts/items'
-  // useEffect(() => {
-  //   bookShelfAPI.fetchItems()
-  //     .then((items) => {
-  //       console.log(items);
-  //       // localStorage.setItem("contacts", JSON.stringify(items))
-  //       dispatch(addItems({items}));
-  //     })
-  //     .catch(error => {
-  //       console.log(error.message); //!
-  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-  //     });
-  //   // dispatch(addItems({items}));
-  // }, [dispatch]);
-
-
-
-  //? Добавление contacts из LocalStorage ==> уже не надо с кнопкой из LocalStorage
-  // useEffect(() => {
-  //   dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: []}));
-  // }, [dispatch]);
-
-
-  //? уже не надо с redux-persist
-  //! Добавление contacts из LocalStorage with redux-persist
-  // useEffect(() => {
-  //   dispatch(addLocalStorageContacts({ key: "persist:items", defaultValue: []}));
-  // }, [dispatch]);
-
-  // const localStoragePersistItems = JSON.parse(localStorage.getItem("persist:items")) ?? [];
-  // console.log(JSON.parse(localStoragePersistItems.items)); //!
-
-
-
-
-  //* Добавление contacts с помощью кнопки из LocalStorage 
-  // const AddAllContactsFromLocalStorage = () => {
-  //   dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: [] }));
-  // };
-
-
-
-  //* Добавление contacts с помощью axios.get-запроса на 'http://localhost:4040/contacts/items'
-  // const AddAllContactsFromMockapi = () => {
-  //   //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts' и добавляем все contacts
-  //   contactsAPI.axiosGetAddAllContacts()
-  //     .then((items) => {
-  //       // console.log("App ==> items:", items); //!
-  //       // localStorage.setItem("contacts", JSON.stringify(items))
-  //       dispatch(addContactsFromAxios({ items }));
-  //     })
-  //     .catch(error => {
-  //       console.log(error.message); //!
-  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-  //     });
-  // };
-
 
 
 

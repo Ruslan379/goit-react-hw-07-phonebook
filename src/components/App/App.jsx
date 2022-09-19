@@ -1,4 +1,4 @@
-// import { useEffect } from 'react'; //! +++
+import { useEffect } from 'react'; //! +++
 import { useDispatch, useSelector } from "react-redux"; //! +++
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,11 +7,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as contactsAPI from 'services/contacts-api';
 // import { getTrendingAllDay } from "fakeAPI";
 
-import { nanoid } from 'nanoid'; 
+// import { nanoid } from 'nanoid'; 
 
 
 import {
-  addLocalStorageContacts,
+  // addLocalStorageContacts,
   addContactsFromAxios,
   addContact,
   deleteContact
@@ -39,6 +39,23 @@ export const App = () => {
   //! читает данные из state Redux-хранилища и подписывается на их обновление
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.contacts.filter);
+
+
+  //* Добавление contacts с помощью axios.get-запроса на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
+  //! Делаем запрос на 'http://localhost:4040/contacts/items'
+  useEffect(() => {
+    contactsAPI.axiosGetAddAllContacts()
+      .then((items) => {
+        console.log("App-axiosGet ==> items:", items); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
+        dispatch(addContactsFromAxios({ items }));
+      })
+      .catch(error => {
+        console.log(error.message); //!
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+      });
+  }, [dispatch]);
+
 
 
   //! Делаем запрос на 'http://localhost:4040/contacts/items'
@@ -76,28 +93,27 @@ export const App = () => {
 
 
 
-  //* Добавление contacts с помощью кнопки из LocalStorage with redux-persist
-  const AddAllContactsFromLocalStorage = () => {
-    dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: [] }));
-  };
+  //* Добавление contacts с помощью кнопки из LocalStorage 
+  // const AddAllContactsFromLocalStorage = () => {
+  //   dispatch(addLocalStorageContacts({ key: "contacts", defaultValue: [] }));
+  // };
 
 
 
-
-//* Добавление contacts с помощью axios.get-запроса на 'http://localhost:4040/contacts/items'
-  const AddAllContactsFromMockapi = () => {
-    //! Делаем запрос на 'http://localhost:4040/contacts/items'
-    contactsAPI.axiosGetAddAllContacts()
-      .then((items) => {
-        // console.log("App ==> items:", items); //!
-        // localStorage.setItem("contacts", JSON.stringify(items))
-        dispatch(addContactsFromAxios({ items }));
-      })
-      .catch(error => {
-        console.log(error.message); //!
-        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-      });
-  };
+  //* Добавление contacts с помощью axios.get-запроса на 'http://localhost:4040/contacts/items'
+  // const AddAllContactsFromMockapi = () => {
+  //   //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts' и добавляем все contacts
+  //   contactsAPI.axiosGetAddAllContacts()
+  //     .then((items) => {
+  //       // console.log("App ==> items:", items); //!
+  //       // localStorage.setItem("contacts", JSON.stringify(items))
+  //       dispatch(addContactsFromAxios({ items }));
+  //     })
+  //     .catch(error => {
+  //       console.log(error.message); //!
+  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+  //     });
+  // };
 
 
 
@@ -110,13 +126,13 @@ export const App = () => {
       toast.warning(`${name} уже есть в контактах.`); 
       return;
     } else {
-      const addNewContact = { id: nanoid(), name, phone };
+      const addNewContact = { name, phone };
       //! Делаем запрос на добавление контакта'
     contactsAPI.axiosPostAddContact(addNewContact)
       .then((items) => {
         console.log("App-axiosPost ==> items:", items); //!
         // localStorage.setItem("contacts", JSON.stringify(items))
-        dispatch(addContact(addNewContact));
+        dispatch(addContact(items));
       })
       .catch(error => {
         console.log(error.message); //!
@@ -180,21 +196,20 @@ export const App = () => {
           onDeleteTodo={deleteTodo}
         />
 
-        <button type="button"
+        {/* <button type="button"
           onClick={AddAllContactsFromMockapi}
         >
-          {/* Делаем запрос на http://localhost:4040/ */}
           ADD contacts from https://mockapi.io/
-        </button>
+        </button> */}
 
         {/* <br></br> */}
-        <br/>
+        {/* <br/> */}
 
-        <button type="button"
+        {/* <button type="button"
           onClick={AddAllContactsFromLocalStorage}
         >
           Add ALL contacts from LocalStorage
-        </button>
+        </button> */}
       </Container>
     );
   }

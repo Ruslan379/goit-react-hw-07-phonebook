@@ -94,9 +94,13 @@
 
 //!  'https://6326c1ee70c3fa390f9bc51d.mockapi.io/contacts'
 
+//!  Добавление контакта в Действия (actions) ==> 
+
 //! +++++++ Хук useDispatch +++++++++++++
 
 //! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
+
+//! alert с предупреждением о наявности контакта
 
 //! useState ===> name (аналог this.state.name)
 
@@ -104,8 +108,14 @@
 
 //! Делаем запрос на добавление контакта'
 
+//! Добавление contacts из LocalStorage with redux-persist
+
 //! Передача значений State (name, phone) в App
 
+//! Принимаем (name, phone) из ContactForm
+
 //! для генерации своего id:  уже не надо
+
+//! запись значения из input-(Find contacts by name) в filter
 
 //! читает данные из state Redux-хранилища и подписывается на их обновление

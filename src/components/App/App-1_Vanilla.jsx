@@ -5,13 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as contactsAPI from 'services/mockapi_io-api';
-import * as itemsOperations from 'redux/itemsOperations';
 
 // import { nanoid } from 'nanoid'; 
 
 
 import {
-  // addContactsFromAxios,
+  addContactsFromAxios,
   addContact,
   deleteContact
 } from 'redux/itemsSlice'; 
@@ -40,31 +39,19 @@ export const App = () => {
   const filter = useSelector(state => state.contacts.filter);
 
 
-  //* Добавление ALL Contacts с помощью axios.get-запроса (МОЙ ВАРИАНТ)
+  //* Добавление ALL Contacts с помощью axios.get-запроса 
   //! Делаем запрос на 'https://6326c1ee70c3fa390f9bc51d.mockapi.io'/contacts'
-  // useEffect(() => {
-  //   contactsAPI.axiosGetAddAllContacts()
-  //     .then((items) => {
-  //       console.log("App-axiosGet ==> items:", items); //!
-  //       dispatch(addContactsFromAxios({ items }));
-  //     })
-  //     .catch(error => {
-  //       console.log(error.message); //!
-  //       toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
-  //     });
-  // }, [dispatch]);
-
-  //* Добавление ALL Contacts с помощью axios.get-запроса (Вариант РЕПЕТЫ с redux-thunk и async/await)
-  //! addAllContactsFroMmockapiIo ==> перенесен в contactsOperations
   useEffect(() => {
-    dispatch(itemsOperations.addAllContactsFroMmockapiIo());
+    contactsAPI.axiosGetAddAllContacts()
+      .then((items) => {
+        console.log("App-axiosGet ==> items:", items); //!
+        dispatch(addContactsFromAxios({ items }));
+      })
+      .catch(error => {
+        console.log(error.message); //!
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+      });
   }, [dispatch]);
-  
-  
-
-
-
-
 
 
 

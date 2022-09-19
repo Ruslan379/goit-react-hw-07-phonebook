@@ -106,8 +106,6 @@
 
 //! useState ===> name (аналог this.state.name)
 
-//! Вариант Репеты с redux-thunk и async/await
-
 //! Передача значений State (name, number) в App
 
 //! Принимаем (name, number) из ContactForm

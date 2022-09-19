@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"; //! +++
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import * as bookShelfAPI from 'services/bookshelf-api';
+import * as contactsAPI from 'services/contacts-api';
 // import { getTrendingAllDay } from "fakeAPI";
 
 import { nanoid } from 'nanoid'; 
@@ -12,7 +12,7 @@ import { nanoid } from 'nanoid';
 
 import {
   addLocalStorageContacts,
-  addItemsFromfetch,
+  addContactsFromAxios,
   addContact,
   deleteContact
 } from 'redux/itemsSlice'; 
@@ -84,14 +84,14 @@ export const App = () => {
 
 
 
-//* Добавление contacts с помощью запроса на 'http://localhost:4040/contacts/items'
-  const AddAllContactsFromfetchItems = () => {
+//* Добавление contacts с помощью axios.get-запроса на 'http://localhost:4040/contacts/items'
+  const AddAllContactsFromMockapi = () => {
     //! Делаем запрос на 'http://localhost:4040/contacts/items'
-    bookShelfAPI.fetchItems()
+    contactsAPI.axiosGetAddAllContacts()
       .then((items) => {
         // console.log("App ==> items:", items); //!
         // localStorage.setItem("contacts", JSON.stringify(items))
-        dispatch(addItemsFromfetch({ items }));
+        dispatch(addContactsFromAxios({ items }));
       })
       .catch(error => {
         console.log(error.message); //!
@@ -110,7 +110,19 @@ export const App = () => {
       toast.warning(`${name} уже есть в контактах.`); 
       return;
     } else {
-      dispatch(addContact({id: nanoid(), name, phone}));
+      const addNewContact = { id: nanoid(), name, phone };
+      //! Делаем запрос на добавление контакта'
+    contactsAPI.axiosPostAddContact(addNewContact)
+      .then((items) => {
+        console.log("App-axiosPost ==> items:", items); //!
+        // localStorage.setItem("contacts", JSON.stringify(items))
+        dispatch(addContact(addNewContact));
+      })
+      .catch(error => {
+        console.log(error.message); //!
+        toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 });
+      });
+      // dispatch(addContact({id: nanoid(), name, phone})); //?
       }
   };
 
@@ -169,7 +181,7 @@ export const App = () => {
         />
 
         <button type="button"
-          onClick={AddAllContactsFromfetchItems}
+          onClick={AddAllContactsFromMockapi}
         >
           {/* Делаем запрос на http://localhost:4040/ */}
           ADD contacts from https://mockapi.io/

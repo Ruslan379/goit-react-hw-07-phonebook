@@ -24,8 +24,9 @@ import { Loader } from 'components/Loader/Loader';
 import { ContactList } from 'components/ContactList/ContactList';
 
 
-
-
+//? +++++++++++ with pokemon.js +++++++++++++++
+import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
+//?________________________________________________
 
 export const App = () => {
 
@@ -53,6 +54,16 @@ export const App = () => {
 
 
 
+
+//? +++++++++++ with pokemon.js +++++++++++++++
+const { data, errorPokemon, isLoadingPokemon } = useGetPokemonByNameQuery('bulbasaur')
+
+//?________________________________________________
+
+  
+  
+  
+  
   //! Добавление ALL Contacts с помощью axios.get-запроса 
   // useEffect(() => dispatch(itemsOperations.addAllContactsFromMmockapiIo()), [dispatch]);  //! ТАК НЕ РАБОТАЕТ!!!
 
@@ -147,6 +158,25 @@ export const App = () => {
             onDeleteTodo={deleteTodo}
           />
         )}
+
+
+        {/* //? +++++++++++ with pokemon.js +++++++++++++++ */}
+        <div className="App">
+          {errorPokemon ? (
+            <>Oh no, there was an error</>
+          ) : isLoadingPokemon ? (
+            <>Loading...</>
+          ) : data ? (
+            <>
+              <h3>{data.species.name}</h3>
+              <img src={data.sprites.front_shiny} alt={data.species.name} />
+            </>
+            ) : null}
+        </div>
+        {/* //?________________________________________________ */}
+
+
+
       </Container>
     );
   }

@@ -6,6 +6,8 @@ import { filterSlice } from 'redux/filter/filterSlice';
 import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
 import { errorSlice } from 'redux/error/errorSlice';
 
+import { pokemonApi } from 'redux/pokemon';
+
 
 //todo +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
 // const initialItems = []; //* Перенесен в 'redux/items/itemsSlice';
@@ -34,12 +36,20 @@ const rootReducer = combineReducers({
 });
 
 //! +++++++++++ store +++++++++++++++
+// export const store = configureStore({
+//     reducer: {
+//         contacts: rootReducer
+//     },
+// });
+
+//? +++++++++++ store with pokemon.js +++++++++++++++
 export const store = configureStore({
     reducer: {
-        contacts: rootReducer
+        contacts: rootReducer,
+        [pokemonApi.reducerPath]: pokemonApi.reducer,
     },
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), pokemonApi.middleware],
 });
-
 
 //! ++++++++++++++++++++++++++++ ВЕСЬ State +++++++++++++++++++++++++++++++++++
 // console.log("ВЕСЬ State из App store.js ==> store.getState():", store.getState()); //!

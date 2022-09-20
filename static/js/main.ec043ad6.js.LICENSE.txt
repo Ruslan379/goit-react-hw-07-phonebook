@@ -101,15 +101,11 @@
 
 //!
 
-//!  'https://6326c1ee70c3fa390f9bc51d.mockapi.io/contacts'
-
-//!  Добавление контакта в Действия (actions) ==> 
-
 //! +++++++ Хук useDispatch +++++++++++++
 
-//! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
+//! +++++++++++ store +++++++++++++++
 
-//! alert с предупреждением о наявности контакта
+//! ++++++++++++++++++ Хук useSelector  ++++++++++++++++++
 
 //! useState ===> contacts (аналог this.state.contacts)
 
@@ -119,11 +115,7 @@
 
 //! Делаем запрос на добавление контакта из mockapi.io/contacts 
 
-//! Добавление ALL Contacts с помощью axios.get-запроса 
-
 //! Передача значений State (name, number) в App
-
-//! Принимаем (name, number) из ContactForm
 
 //! Проверка results на пустой объект
 

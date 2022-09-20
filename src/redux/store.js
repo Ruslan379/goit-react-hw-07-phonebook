@@ -7,20 +7,22 @@ import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
 import { errorSlice } from 'redux/error/errorSlice';
 
 
-//! +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
-// const initialItems = []; //* Перенесен в 'redux/itemsSlice';
-// const initialFilter = "";  //* Перенесен в 'redux/itemsSlice';
-// const initialIsLoading = false; //* Перенесен в 'redux/isLoadingSlice';
+//todo +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
+// const initialItems = []; //* Перенесен в 'redux/items/itemsSlice';
+// const initialFilter = "";  //* Перенесен в 'redux/filter/filterSlice';
+// const initialIsLoading = false; //* Перенесен в 'redux/isLoading/isLoadingSlice';
+// const initialError = null; //* Перенесен в 'redux/error/errorSlice';
 
-//! Модель (проэктирование) State
+//todo Модель (проэктирование) State
 // const allState = {
 //     contacts: {
 //         items: initialItems,
 //         filter: initialFilter,
-//         isLoading: initialIsLoading
+//         isLoading: initialIsLoading,
+//         error: initialError
 //     }
 // };
-
+//todo_________________________________________________________________________
 
 
 //! With createSlice

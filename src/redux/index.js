@@ -1,7 +1,7 @@
 export * as store from './store';
 
 export * as itemsSelectors from './itemsSelectors';
-export * as filterSelectors from './filterSelectors';
+export * as filterSelectors from './filter/filterSelectors';
 
 export * as itemsOperations from './itemsOperations';
 

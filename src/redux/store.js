@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux';
 
-import { itemsSlice } from 'redux/itemsSlice';
-import { filterSlice } from 'redux/filterSlice';
-import { isLoadingSlice } from 'redux/isLoadingSlice';
-import { errorSlice } from 'redux/errorSlice';
+import { itemsSlice } from 'redux/items/itemsSlice';
+import { filterSlice } from 'redux/filter/filterSlice';
+import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
+import { errorSlice } from 'redux/error/errorSlice';
 
 
 //! +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++

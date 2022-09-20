@@ -19,7 +19,7 @@ import * as itemsOperations from 'redux/itemsOperations';
 // import { itemsOperations } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
 import { getContacts } from 'redux/itemsSelectors';
-import { getFilter } from 'redux/filterSelectors';
+import { getFilter } from 'redux/filter/filterSelectors';
 
 // import { itemsSelectors, filterSelectors } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 

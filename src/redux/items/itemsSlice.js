@@ -6,7 +6,7 @@ import {
     addAllContactsFromMmockapiIo,
     addOneContactToMmockapiIo,
     deleteOneContactFromMmockapiIo
-} from 'redux/itemsOperations'
+} from 'redux/items/itemsOperations'
 
 
 

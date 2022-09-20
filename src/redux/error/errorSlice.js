@@ -4,27 +4,27 @@ import {
     addAllContactsFromMmockapiIo,
     addOneContactToMmockapiIo,
     deleteOneContactFromMmockapiIo
-} from 'redux/itemsOperations'
+} from 'redux/items//itemsOperations'
 
 
-const initialIsLoading = false;
+const initialError = null;
 
 //* +++++++++++++++++++++ filterSlice +++++++++++++++++++++
-export const isLoadingSlice = createSlice({
-    name: 'isLoading',
-    initialState: initialIsLoading,
+export const errorSlice = createSlice({
+    name: 'error',
+    initialState: initialError,
     extraReducers: {
-        [addAllContactsFromMmockapiIo.pending]: () => true,
-        [addAllContactsFromMmockapiIo.fulfilled]: () => false,
-        [addAllContactsFromMmockapiIo.rejected]: () => false,
+        [addAllContactsFromMmockapiIo.pending]: () => null,
+        [addAllContactsFromMmockapiIo.fulfilled]: () => null,
+        [addAllContactsFromMmockapiIo.rejected]: (_, action) => action.payload,
 
-        [addOneContactToMmockapiIo.pending]: () => true,
-        [addOneContactToMmockapiIo.fulfilled]: () => false,
-        [addOneContactToMmockapiIo.rejected]: () => false,
+        [addOneContactToMmockapiIo.pending]: () => null,
+        [addOneContactToMmockapiIo.fulfilled]: () => null,
+        [addOneContactToMmockapiIo.rejected]: (_, action) => action.payload,
 
-        [deleteOneContactFromMmockapiIo.pending]: () => true,
-        [deleteOneContactFromMmockapiIo.fulfilled]: () => false,
-        [deleteOneContactFromMmockapiIo.rejected]: () => false,
+        [deleteOneContactFromMmockapiIo.pending]: () => null,
+        [deleteOneContactFromMmockapiIo.fulfilled]: () => null,
+        [deleteOneContactFromMmockapiIo.rejected]: (_, action) => action.payload,
     }
 });
 

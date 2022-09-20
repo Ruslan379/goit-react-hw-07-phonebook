@@ -5,17 +5,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import * as itemsOperations from 'redux/itemsOperations';
+import * as itemsOperations from 'redux/items/itemsOperations';
 // import { itemsOperations } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
-import { getContacts } from 'redux/itemsSelectors';
-import { getFilter } from 'redux/filterSelectors';
-import { getIsLoading } from 'redux/isLoadingSelectors';
-import { getError } from 'redux/errorSelectors';
+import { getContacts } from 'redux/items/itemsSelectors';
+import { getFilter } from 'redux/filter/filterSelectors';
+import { getIsLoading } from 'redux/isLoading/isLoadingSelectors';
+import { getError } from 'redux/error/errorSelectors';
 
 // import { itemsSelectors, filterSelectors } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
-import { changesFilter } from 'redux/filterSlice'; 
+import { changesFilter } from 'redux/filter/filterSlice'; 
 
 import { Container } from 'components/Container/Container';
 import { ContactForm } from 'components/ContactForm/ContactForm';

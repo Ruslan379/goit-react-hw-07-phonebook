@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import { itemsSlice } from 'redux/itemsSlice';
 import { filterSlice } from 'redux/filterSlice';
+import { isLoadingSlice } from 'redux/isLoadingSlice';
 
 
 //! +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
@@ -22,7 +23,8 @@ import { filterSlice } from 'redux/filterSlice';
 //! With createSlice
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
-    filter: filterSlice.reducer
+    filter: filterSlice.reducer,
+    isLoading: isLoadingSlice.reducer
 });
 
 //! +++++++++++ store +++++++++++++++

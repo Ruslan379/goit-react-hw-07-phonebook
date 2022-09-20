@@ -10,6 +10,7 @@ import * as itemsOperations from 'redux/itemsOperations';
 
 import { getContacts } from 'redux/itemsSelectors';
 import { getFilter } from 'redux/filterSelectors';
+import { getIsLoading } from 'redux/isLoadingSelectors';
 
 // import { itemsSelectors, filterSelectors } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
@@ -18,6 +19,7 @@ import { changesFilter } from 'redux/filterSlice';
 import { Container } from 'components/Container/Container';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
+import { Loader } from 'components/Loader/Loader';
 import { ContactList } from 'components/ContactList/ContactList';
 
 
@@ -39,6 +41,8 @@ export const App = () => {
   // const filter = useSelector(state => state.contacts.filter); //? 1 вариант
   // const filter = useSelector(filterSelectors.getFilter); //! ТАК НЕ РАБОТАЕТ с Re-export
   const filter = useSelector(getFilter);
+  const isLoading = useSelector(getIsLoading);
+  console.log("isLoading:", isLoading); //!
 
 
 
@@ -106,7 +110,7 @@ export const App = () => {
 // * +++++++++++++++++++++++++++ MARKUP ++++++++++++++++++++++++++++++++++
     return (
       <Container>
-        <ToastContainer autoClose={1000} />
+        <ToastContainer autoClose={1500} theme={"colored"} />
 
         <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with createAsyncThunk)</span></h1>
 
@@ -119,8 +123,12 @@ export const App = () => {
           value={filter}
           onChange={changeFilter}
         />
-        
-        {totalContacts > 0 && (
+
+        <br/>
+        {isLoading && <Loader />}
+        <br/>
+
+        {totalContacts > 0 && !isLoading && (
           <ContactList
             visibleContacts={visibleContacts}
             onDeleteTodo={deleteTodo}

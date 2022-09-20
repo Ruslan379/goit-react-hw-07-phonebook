@@ -29,7 +29,7 @@ export async function axiosDeleteContact(id) {
 
 //? +++++++++++ with RTK Query +++++++++++++++
 export const itemsAPIbyRTKQuery = createApi({
-  reducerPath: 'itemsAPI',
+  reducerPath: 'items',
   tagTypes: ["Contacts"],
 
   baseQuery: fetchBaseQuery({ baseUrl: 'https://6326c1ee70c3fa390f9bc51d.mockapi.io' }),

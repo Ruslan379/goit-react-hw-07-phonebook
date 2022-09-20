@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux';
 
-import { itemsSlice } from 'redux/items/itemsSlice';
+// import { itemsSlice } from 'redux/items/itemsSlice'; //! +-+-+-+-
 import { filterSlice } from 'redux/filter/filterSlice';
-import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
-import { errorSlice } from 'redux/error/errorSlice';
+// import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice'; //! +-+-+-+-
+// import { errorSlice } from 'redux/error/errorSlice'; //! +-+-+-+-
 
 
 //? +++++++++++ with RTK Query +++++++++++++++
@@ -41,11 +41,11 @@ import { itemsAPIbyRTKQuery } from 'services/mockapi_io-api';
 
 //? +++++++++++ store with with RTK Query pokemon.js (1 вариант - РАБОЧИЙ) +++++++++++++++
 const rootReducer = combineReducers({
-    items: itemsSlice.reducer,
+    // items: itemsSlice.reducer,
     // [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
     filter: filterSlice.reducer,
-    isLoading: isLoadingSlice.reducer,
-    error: errorSlice.reducer
+    // isLoading: isLoadingSlice.reducer,
+    // error: errorSlice.reducer
 });
 
 
@@ -67,20 +67,19 @@ export const store = configureStore({
 });
 
 
-//? +++++++++++ store with RTK Query (2 вариант - РАБОЧИЙ и простой, ПОКА НЕ ПОДКЛЮЧЕН!!!) +++++++++++++++
-export const store_RTK = configureStore({
-    reducer: {
-        contacts: combineReducers({
-            // items: itemsSlice.reducer,
-            [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
-            filter: filterSlice.reducer,
-            // isLoading: isLoadingSlice.reducer,
-            // error: errorSlice.reducer
-        }),
-    },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), itemsAPIbyRTKQuery.middleware],
-});
-
+//? +++++++++++ store with RTK Query (2 вариант - НЕ РАБОЧИЙ, зависает на Loader) +++++++++++++++
+// export const store = configureStore({
+//     reducer: {
+//         contacts: combineReducers({
+//             // items: itemsSlice.reducer,
+//             [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
+//             filter: filterSlice.reducer
+//             // isLoading: isLoadingSlice.reducer,
+//             // error: errorSlice.reducer
+//         }),
+//     },
+//     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), itemsAPIbyRTKQuery.middleware],
+// });
 
 
 

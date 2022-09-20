@@ -74,12 +74,14 @@ export const App = () => {
   // console.log("isLoadingPokemonRTKQuery:", isLoadingPokemonRTKQuery); //!
 //----------------------------------- GET ------------------------------------------
   // const { data: contacts, isFetching: isLoading, error: error} = usegetAddAllContactsQuery();
-  const { data = [], isFetching: isLoading, error} = useGetAddAllContactsQuery();
+  // const { data = [], isFetching: isLoading, error } = useGetAddAllContactsQuery(); //! +-+-+-+-
+  const { data = [], isLoading = false, error = null} = useGetAddAllContactsQuery();
   // console.log("contacts_RTK:", contacts); //!
   console.log("data:", data); //!
   console.log("isLoading_RTK:", isLoading); //!
   // const contacts = data; //! +-+-+-+-
-  // console.log("error_RTK:", error_RTK); //!
+  // const error = null;
+  console.log("error_RTK:", error); //!
 
   // useEffect(() => {
     // const addAllСontact =  async (data) => {
@@ -99,8 +101,9 @@ export const App = () => {
 console.log("contacts_RTK:", contacts); //!
 
 //--------------------------------- POST ---------------------------------------
-  const [addContact, { isError }] = usePostAddContactMutation();
-  console.log("isError:", isError); //!
+  // const [addContact, { isError }] = usePostAddContactMutation();
+  const [addContact] = usePostAddContactMutation();
+  // console.log("isError:", isError); //!
 
   // const handleAddContact = async () => {
   //   // const addNewContact = { name, phone: number };

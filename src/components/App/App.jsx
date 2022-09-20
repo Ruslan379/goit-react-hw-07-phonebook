@@ -25,9 +25,9 @@ import { Loader } from 'components/Loader/Loader';
 import { ContactList } from 'components/ContactList/ContactList';
 
 
-//? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
+//? +++++++++++ with RTK Query & pokemon.js +++++++++++++++
 // import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
-import { useAxiosGetAddAllContactsQuery } from 'services/mockapi_io-api'; 
+import { useGetAddAllContactsQuery } from 'services/mockapi_io-api'; 
 
 //?________________________________________________
 
@@ -54,8 +54,8 @@ export const App = () => {
   const error = useSelector(getError); //! +-+-+-+-
   // console.log("error:", error); //!
 
-  //? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++ НЕ РАБОТАЕТ!!!
-  // const contacts_RTK = useSelector(state => state.itemsAPI.queries.'axiosGetAddAllContacts(undefined)'.data); //? 2 вариант
+  //? +++++++++++ with RTK Query & pokemon.js +++++++++++++++ НЕ РАБОТАЕТ!!!
+  // const contacts_RTK = useSelector(state => state.itemsAPI.queries.'getAddAllContacts(undefined)'.data); //? 2 вариант
   // console.log("contacts_RTK:", contacts_RTK); //!
   //!___________________________________________________________
 
@@ -63,15 +63,15 @@ export const App = () => {
 
 
 
-//? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
+//? +++++++++++ with RTK Query & pokemon.js +++++++++++++++
   // const { data, error: errorPokemon, isLoading: isLoadingPokemon } = useGetPokemonByNameQuery('bulbasaur');
-  // const { data: dataRTKQuery, error: errorPokemonRTKQuery, isLoading: isLoadingPokemonRTKQuery } = useAxiosGetAddAllContactsQuery();
+  // const { data: dataRTKQuery, error: errorPokemonRTKQuery, isLoading: isLoadingPokemonRTKQuery } = usegetAddAllContactsQuery();
   // console.log("dataRTKQuery:", dataRTKQuery); //!
   // console.log("errorPokemonRTKQuery:", errorPokemonRTKQuery); //!
   // console.log("isLoadingPokemonRTKQuery:", isLoadingPokemonRTKQuery); //!
 
-// const { data: contacts, isFetching: isLoading, error: error} = useAxiosGetAddAllContactsQuery();
-  const { data = [], isFetching: isLoading_RTK, } = useAxiosGetAddAllContactsQuery();
+// const { data: contacts, isFetching: isLoading, error: error} = usegetAddAllContactsQuery();
+  const { data = [], isFetching: isLoading_RTK, } = useGetAddAllContactsQuery();
   // console.log("contacts_RTK:", contacts); //!
   console.log("data:", data); //!
   console.log("isLoading_RTK:", isLoading_RTK); //!
@@ -138,6 +138,7 @@ export const App = () => {
 
   // const visibleContacts = contacts; //! временно
   const visibleContacts = getVisibleContacts();
+  // const totalContacts = 1; //! временно
   const totalContacts = contacts.length;
 
 
@@ -174,8 +175,8 @@ export const App = () => {
         {isLoading && <Loader />}
         <br/>
 
-        {/* //? +++++++++++ with RTK Qury +++++++++++++++ */}
-        <p>Contacts with RTK Qury</p>
+        {/* //? +++++++++++ with RTK Query +++++++++++++++ */}
+        <p>Contacts with RTK Query</p>
         <ul>
           {data.map(({ id, name, phone }) => (
             <li key={id}>

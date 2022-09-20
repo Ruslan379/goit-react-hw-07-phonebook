@@ -7,9 +7,9 @@ import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
 import { errorSlice } from 'redux/error/errorSlice';
 
 
-//? +++++++++++ with RTK Qury +++++++++++++++
+//? +++++++++++ with RTK Query +++++++++++++++
 // import { pokemonApi } from 'redux/pokemon';
-import { axiosGetAddAllContactsNEW } from 'services/mockapi_io-api';
+import { itemsAPIbyRTKQuery } from 'services/mockapi_io-api';
 
 //?________________________________________________
 
@@ -39,10 +39,10 @@ import { axiosGetAddAllContactsNEW } from 'services/mockapi_io-api';
 //     error: errorSlice.reducer
 // });
 
-//? +++++++++++ store with with RTKQery pokemon.js (1 вариант - РАБОЧИЙ) +++++++++++++++
+//? +++++++++++ store with with RTK Query pokemon.js (1 вариант - РАБОЧИЙ) +++++++++++++++
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
-    // [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
+    // [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
     filter: filterSlice.reducer,
     isLoading: isLoadingSlice.reducer,
     error: errorSlice.reducer
@@ -56,29 +56,29 @@ const rootReducer = combineReducers({
 //     },
 // });
 
-//? +++++++++++ store with RTKQery & pokemon.js  (1 вариант - РАБОЧИЙ) +++++++++++++++
+//? +++++++++++ store with RTK Query & pokemon.js  (1 вариант - РАБОЧИЙ) +++++++++++++++
 export const store = configureStore({
     reducer: {
         contacts: rootReducer,
         // [pokemonApi.reducerPath]: pokemonApi.reducer,
-        [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
+        [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
     },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), axiosGetAddAllContactsNEW.middleware],
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), itemsAPIbyRTKQuery.middleware],
 });
 
 
-//? +++++++++++ store with RTKQery (2 вариант - РАБОЧИЙ и простой, ПОКА НЕ ПОДКЛЮЧЕН!!!) +++++++++++++++
+//? +++++++++++ store with RTK Query (2 вариант - РАБОЧИЙ и простой, ПОКА НЕ ПОДКЛЮЧЕН!!!) +++++++++++++++
 export const store_RTK = configureStore({
     reducer: {
         contacts: combineReducers({
             // items: itemsSlice.reducer,
-            [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
+            [itemsAPIbyRTKQuery.reducerPath]: itemsAPIbyRTKQuery.reducer,
             filter: filterSlice.reducer,
             // isLoading: isLoadingSlice.reducer,
             // error: errorSlice.reducer
         }),
     },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), axiosGetAddAllContactsNEW.middleware],
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), itemsAPIbyRTKQuery.middleware],
 });
 
 

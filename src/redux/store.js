@@ -39,7 +39,7 @@ import { axiosGetAddAllContactsNEW } from 'services/mockapi_io-api';
 //     error: errorSlice.reducer
 // });
 
-//? +++++++++++ store with with RTKQery pokemon.js +++++++++++++++
+//? +++++++++++ store with with RTKQery pokemon.js (1 вариант - РАБОЧИЙ) +++++++++++++++
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
     // [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
@@ -56,16 +56,34 @@ const rootReducer = combineReducers({
 //     },
 // });
 
-//? +++++++++++ store with RTKQery & pokemon.js +++++++++++++++
+//? +++++++++++ store with RTKQery & pokemon.js  (1 вариант - РАБОЧИЙ) +++++++++++++++
 export const store = configureStore({
     reducer: {
         contacts: rootReducer,
         // [pokemonApi.reducerPath]: pokemonApi.reducer,
         [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
     },
-    // middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), pokemonApi.middleware],
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), axiosGetAddAllContactsNEW.middleware],
 });
 
+
+//? +++++++++++ store with RTKQery (2 вариант - РАБОЧИЙ и простой, ПОКА НЕ ПОДКЛЮЧЕН!!!) +++++++++++++++
+export const store_RTK = configureStore({
+    reducer: {
+        contacts: combineReducers({
+            // items: itemsSlice.reducer,
+            [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
+            filter: filterSlice.reducer,
+            // isLoading: isLoadingSlice.reducer,
+            // error: errorSlice.reducer
+        }),
+    },
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), axiosGetAddAllContactsNEW.middleware],
+});
+
+
+
+
 //! ++++++++++++++++++++++++++++ ВЕСЬ State +++++++++++++++++++++++++++++++++++
-// console.log("ВЕСЬ State из App store.js ==> store.getState():", store.getState()); //!
+// console.log("ВЕСЬ State из store.js ==> store.getState():", store.getState()); //!
 //! ____________________________________________________________________________

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"; //! +++
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// import { store } from 'redux/store'; //? +++ 
 
 import * as itemsOperations from 'redux/items/itemsOperations';
 // import { itemsOperations } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
@@ -44,13 +45,18 @@ export const App = () => {
   const contacts = useSelector(getContacts); //! +-+-+-+-
   // const filter = useSelector(state => state.contacts.filter); //? 1 вариант
   // const filter = useSelector(filterSelectors.getFilter); //! ТАК НЕ РАБОТАЕТ с Re-export
-  const filter = useSelector(getFilter);
+  const filter = useSelector(getFilter); //! +-+-+-+-
+  // const filter = ""; //! временно
 
-  const isLoading = useSelector(getIsLoading);
-  console.log("isLoading:", isLoading); //!
+  const isLoading = useSelector(getIsLoading); //! +-+-+-+-
+  // console.log("isLoading:", isLoading); //!
 
-  const error = useSelector(getError);
+  const error = useSelector(getError); //! +-+-+-+-
   // console.log("error:", error); //!
+
+  //? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++ НЕ РАБОТАЕТ!!!
+  // const contacts_RTK = useSelector(state => state.itemsAPI.queries.'axiosGetAddAllContacts(undefined)'.data); //? 2 вариант
+  // console.log("contacts_RTK:", contacts_RTK); //!
   //!___________________________________________________________
 
 
@@ -64,9 +70,14 @@ export const App = () => {
   // console.log("errorPokemonRTKQuery:", errorPokemonRTKQuery); //!
   // console.log("isLoadingPokemonRTKQuery:", isLoadingPokemonRTKQuery); //!
 
-const { data: contactsRTK } = useAxiosGetAddAllContactsQuery(56);
-  // const { data: contactsRTK } = useAxiosGetAddAllContactsQuery();
-  console.log("contactsRTK:", contactsRTK); //!
+// const { data: contacts, isFetching: isLoading, error: error} = useAxiosGetAddAllContactsQuery();
+  const { data = [], isFetching: isLoading_RTK, } = useAxiosGetAddAllContactsQuery();
+  // console.log("contacts_RTK:", contacts); //!
+  console.log("data:", data); //!
+  console.log("isLoading_RTK:", isLoading_RTK); //!
+  // const contacts = data; //! +-+-+-+-
+  // console.log("error_RTK:", error_RTK); //!
+
 //?________________________________________________
 
   
@@ -81,7 +92,6 @@ const { data: contactsRTK } = useAxiosGetAddAllContactsQuery(56);
   }, [dispatch]);
 
   
-
   //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
   //!  Добавление контакта в Действия (actions) ==> 
@@ -126,12 +136,16 @@ const { data: contactsRTK } = useAxiosGetAddAllContactsQuery(56);
   };
 
 
-  
+  // const visibleContacts = contacts; //! временно
   const visibleContacts = getVisibleContacts();
   const totalContacts = contacts.length;
 
 
-
+  //! Проверка results на пустой объект
+  // if (!data) {
+  //   return null;
+  // };
+  
 // * +++++++++++++++++++++++++++ MARKUP ++++++++++++++++++++++++++++++++++
     return (
       <Container>
@@ -160,19 +174,15 @@ const { data: contactsRTK } = useAxiosGetAddAllContactsQuery(56);
         {isLoading && <Loader />}
         <br/>
 
-        {/* //? +++++++++++ with pokemon.js +++++++++++++++ */}
-        {/* <div className="App">
-          {errorPokemon ? (
-            <>Oh no, there was an error</>
-          ) : isLoadingPokemon ? (
-            <>Loading...</>
-          ) : data ? (
-            <>
-              <h3>{data.species.name}</h3>
-              <img src={data.sprites.front_shiny} alt={data.species.name} />
-            </>
-            ) : null}
-        </div> */}
+        {/* //? +++++++++++ with RTK Qury +++++++++++++++ */}
+        <p>Contacts with RTK Qury</p>
+        <ul>
+          {data.map(({ id, name, phone }) => (
+            <li key={id}>
+              <p>{name}: {phone}</p>
+            </li>
+          ))}
+        </ul>
         {/* //?________________________________________________ */}
 
 

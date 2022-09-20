@@ -29,12 +29,12 @@ export async function axiosDeleteContact(id) {
 
 //? +++++++++++ with RTK Qury +++++++++++++++
 export const axiosGetAddAllContactsNEW = createApi({
-  reducerPath: 'itemsApi',
+  reducerPath: 'itemsAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://6326c1ee70c3fa390f9bc51d.mockapi.io' }),
   endpoints: (builder) => ({
     axiosGetAddAllContacts: builder.query({
-      query: (name) => `/contacts/${name}`,
-      // query: () => `/contacts`,
+      // query: (name) => `/contacts/${name}`,
+      query: () => `/contacts`,
     }),
   }),
 })

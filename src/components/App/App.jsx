@@ -11,6 +11,7 @@ import * as itemsOperations from 'redux/itemsOperations';
 import { getContacts } from 'redux/itemsSelectors';
 import { getFilter } from 'redux/filterSelectors';
 import { getIsLoading } from 'redux/isLoadingSelectors';
+import { getError } from 'redux/errorSelectors';
 
 // import { itemsSelectors, filterSelectors } from 'redux'; //! ТАК НЕ РАБОТАЕТ с Re-export
 
@@ -41,8 +42,13 @@ export const App = () => {
   // const filter = useSelector(state => state.contacts.filter); //? 1 вариант
   // const filter = useSelector(filterSelectors.getFilter); //! ТАК НЕ РАБОТАЕТ с Re-export
   const filter = useSelector(getFilter);
+
   const isLoading = useSelector(getIsLoading);
   console.log("isLoading:", isLoading); //!
+
+  const error = useSelector(getError);
+  // console.log("error:", error); //!
+  //!___________________________________________________________
 
 
 
@@ -119,6 +125,13 @@ export const App = () => {
         <h2>Contacts</h2>
         <p>Total: {totalContacts}</p>
 
+      {error && (
+          <div style={{ margin: '0 auto', color: 'red' }}>
+            <h1>The request failed:</h1>
+            <h2 style={{ textDecoration: "underline", fontStyle: 'italic', color: '#a10000' }}>!!! {error}</h2>
+          </div>
+        )}
+
         <Filter
           value={filter}
           onChange={changeFilter}
@@ -134,7 +147,6 @@ export const App = () => {
             onDeleteTodo={deleteTodo}
           />
         )}
-        
       </Container>
     );
   }

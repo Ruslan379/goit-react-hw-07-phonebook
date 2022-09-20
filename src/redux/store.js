@@ -4,17 +4,20 @@ import { combineReducers } from 'redux';
 import { itemsSlice } from 'redux/itemsSlice';
 import { filterSlice } from 'redux/filterSlice';
 import { isLoadingSlice } from 'redux/isLoadingSlice';
+import { errorSlice } from 'redux/errorSlice';
 
 
 //! +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
 // const initialItems = []; //* Перенесен в 'redux/itemsSlice';
 // const initialFilter = "";  //* Перенесен в 'redux/itemsSlice';
+// const initialIsLoading = false; //* Перенесен в 'redux/isLoadingSlice';
 
 //! Модель (проэктирование) State
 // const allState = {
 //     contacts: {
 //         items: initialItems,
-//         filter: initialFilter
+//         filter: initialFilter,
+//         isLoading: initialIsLoading
 //     }
 // };
 
@@ -24,7 +27,8 @@ import { isLoadingSlice } from 'redux/isLoadingSlice';
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
     filter: filterSlice.reducer,
-    isLoading: isLoadingSlice.reducer
+    isLoading: isLoadingSlice.reducer,
+    error: errorSlice.reducer
 });
 
 //! +++++++++++ store +++++++++++++++

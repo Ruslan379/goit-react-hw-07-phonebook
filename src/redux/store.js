@@ -6,8 +6,12 @@ import { filterSlice } from 'redux/filter/filterSlice';
 import { isLoadingSlice } from 'redux/isLoading/isLoadingSlice';
 import { errorSlice } from 'redux/error/errorSlice';
 
-import { pokemonApi } from 'redux/pokemon';
 
+//? +++++++++++ with RTK Qury +++++++++++++++
+// import { pokemonApi } from 'redux/pokemon';
+import { axiosPostAddContactNEW } from 'services/mockapi_io-api';
+
+//?________________________________________________
 
 //todo +++++++++++++++++++++++ ИНИЦИАЛИЗАЦИЯ ВСЕХ частей State ++++++++++++
 // const initialItems = []; //* Перенесен в 'redux/items/itemsSlice';
@@ -27,13 +31,23 @@ import { pokemonApi } from 'redux/pokemon';
 //todo_________________________________________________________________________
 
 
-//! With createSlice
+// //! With createSlice
+// const rootReducer = combineReducers({
+//     items: itemsSlice.reducer,
+//     filter: filterSlice.reducer,
+//     isLoading: isLoadingSlice.reducer,
+//     error: errorSlice.reducer
+// });
+
+//? +++++++++++ store with with RTKQery pokemon.js +++++++++++++++
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
+    // [axiosPostAddContactNEW.reducerPath]: axiosPostAddContactNEW.reducer,
     filter: filterSlice.reducer,
     isLoading: isLoadingSlice.reducer,
     error: errorSlice.reducer
 });
+
 
 //! +++++++++++ store +++++++++++++++
 // export const store = configureStore({
@@ -42,13 +56,14 @@ const rootReducer = combineReducers({
 //     },
 // });
 
-//? +++++++++++ store with pokemon.js +++++++++++++++
+//? +++++++++++ store with RTKQery & pokemon.js +++++++++++++++
 export const store = configureStore({
     reducer: {
         contacts: rootReducer,
-        [pokemonApi.reducerPath]: pokemonApi.reducer,
+        // [pokemonApi.reducerPath]: pokemonApi.reducer,
+        [axiosPostAddContactNEW.reducerPath]: axiosPostAddContactNEW.reducer,
     },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), pokemonApi.middleware],
+    // middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), pokemonApi.middleware],
 });
 
 //! ++++++++++++++++++++++++++++ ВЕСЬ State +++++++++++++++++++++++++++++++++++

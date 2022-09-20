@@ -24,8 +24,10 @@ import { Loader } from 'components/Loader/Loader';
 import { ContactList } from 'components/ContactList/ContactList';
 
 
-//? +++++++++++ with pokemon.js +++++++++++++++
-import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
+//? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
+// import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
+import { useAxiosPostAddContactQuery } from 'services/mockapi_io-api'; 
+
 //?________________________________________________
 
 export const App = () => {
@@ -39,7 +41,7 @@ export const App = () => {
   //! читает данные из state Redux-хранилища и подписывается на их обновление
   // const contacts = useSelector(state => state.contacts.items); //? 1 вариант
   // const contacts = useSelector(itemsSelectors.getContacts); //! ТАК НЕ РАБОТАЕТ с Re-export
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(getContacts); //! +-+-+-+-
   // const filter = useSelector(state => state.contacts.filter); //? 1 вариант
   // const filter = useSelector(filterSelectors.getFilter); //! ТАК НЕ РАБОТАЕТ с Re-export
   const filter = useSelector(getFilter);
@@ -55,9 +57,16 @@ export const App = () => {
 
 
 
-//? +++++++++++ with pokemon.js +++++++++++++++
-const { data, errorPokemon, isLoadingPokemon } = useGetPokemonByNameQuery('bulbasaur')
+//? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
+  // const { data, error: errorPokemon, isLoading: isLoadingPokemon } = useGetPokemonByNameQuery('bulbasaur');
+  // const { data: dataRTKQuery, error: errorPokemonRTKQuery, isLoading: isLoadingPokemonRTKQuery } = useAxiosPostAddContactQuery();
+  // console.log("dataRTKQuery:", dataRTKQuery); //!
+  // console.log("errorPokemonRTKQuery:", errorPokemonRTKQuery); //!
+  // console.log("isLoadingPokemonRTKQuery:", isLoadingPokemonRTKQuery); //!
 
+const { data: contactsRTK } = useAxiosPostAddContactQuery();
+  // const { data: contactsRTK } = useAxiosPostAddContactQuery();
+  console.log("contactsRTK:", contactsRTK); //!
 //?________________________________________________
 
   
@@ -71,8 +80,7 @@ const { data, errorPokemon, isLoadingPokemon } = useGetPokemonByNameQuery('bulba
     dispatch(itemsOperations.addAllContactsFromMmockapiIo());
   }, [dispatch]);
 
-
-
+  
 
   //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
@@ -152,16 +160,8 @@ const { data, errorPokemon, isLoadingPokemon } = useGetPokemonByNameQuery('bulba
         {isLoading && <Loader />}
         <br/>
 
-        {totalContacts > 0 && !isLoading && (
-          <ContactList
-            visibleContacts={visibleContacts}
-            onDeleteTodo={deleteTodo}
-          />
-        )}
-
-
         {/* //? +++++++++++ with pokemon.js +++++++++++++++ */}
-        <div className="App">
+        {/* <div className="App">
           {errorPokemon ? (
             <>Oh no, there was an error</>
           ) : isLoadingPokemon ? (
@@ -172,11 +172,16 @@ const { data, errorPokemon, isLoadingPokemon } = useGetPokemonByNameQuery('bulba
               <img src={data.sprites.front_shiny} alt={data.species.name} />
             </>
             ) : null}
-        </div>
+        </div> */}
         {/* //?________________________________________________ */}
 
 
-
+        {totalContacts > 0 && !isLoading && (
+          <ContactList
+            visibleContacts={visibleContacts}
+            onDeleteTodo={deleteTodo}
+          />
+        )}
       </Container>
     );
   }

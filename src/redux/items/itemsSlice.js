@@ -8,6 +8,12 @@ import {
     deleteOneContactFromMmockapiIo
 } from 'redux/items/itemsOperations'
 
+//? +++++++++++ with RTK Qury +++++++++++++++
+// import { axiosPostAddContactNEW } from 'services/mockapi_io-api';
+//?________________________________________________
+
+
+
 
 
 const initialItems = [];
@@ -18,6 +24,8 @@ export const itemsSlice = createSlice({
     initialState: initialItems,
     extraReducers: {
         [addAllContactsFromMmockapiIo.fulfilled]: (_, { payload }) => {
+            // [axiosPostAddContactNEW.fulfilled]: (_, { payload }) => { //? with RTK Qury
+            console.log("payload:", payload); //!
             const newIdItems = payload.map(item => {
                 return {
                     id: item.id,

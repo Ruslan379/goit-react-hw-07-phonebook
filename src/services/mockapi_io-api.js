@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+//? +++++++++++ with RTK Qury +++++++++++++++
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+//?________________________________________________
+
+
+
 
 axios.defaults.baseURL = 'https://6326c1ee70c3fa390f9bc51d.mockapi.io';
 
@@ -18,10 +24,24 @@ export async function axiosDeleteContact(id) {
   const { data } = await axios.delete(`/contacts/${id}`);
   return data;
 };
+//!____________________________________________________________
 
 
+//? +++++++++++ with RTK Qury +++++++++++++++
+export const axiosPostAddContactNEW = createApi({
+  reducerPath: 'itemsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://6326c1ee70c3fa390f9bc51d.mockapi.io' }),
+  endpoints: (builder) => ({
+    axiosPostAddContact: builder.query({
+      // query: (name) => `/contacts/${name}`,
+      query: () => `/contacts`,
+    }),
+  }),
+})
 
+export const { useAxiosPostAddContactQuery } = axiosPostAddContactNEW;
 
+//?________________________________________________
 
 
 //todo ------------------  РЕПЕТА ------------------

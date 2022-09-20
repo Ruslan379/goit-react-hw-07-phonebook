@@ -9,7 +9,7 @@ import { errorSlice } from 'redux/error/errorSlice';
 
 //? +++++++++++ with RTK Qury +++++++++++++++
 // import { pokemonApi } from 'redux/pokemon';
-import { axiosPostAddContactNEW } from 'services/mockapi_io-api';
+import { axiosGetAddAllContactsNEW } from 'services/mockapi_io-api';
 
 //?________________________________________________
 
@@ -42,7 +42,7 @@ import { axiosPostAddContactNEW } from 'services/mockapi_io-api';
 //? +++++++++++ store with with RTKQery pokemon.js +++++++++++++++
 const rootReducer = combineReducers({
     items: itemsSlice.reducer,
-    // [axiosPostAddContactNEW.reducerPath]: axiosPostAddContactNEW.reducer,
+    // [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
     filter: filterSlice.reducer,
     isLoading: isLoadingSlice.reducer,
     error: errorSlice.reducer
@@ -61,7 +61,7 @@ export const store = configureStore({
     reducer: {
         contacts: rootReducer,
         // [pokemonApi.reducerPath]: pokemonApi.reducer,
-        [axiosPostAddContactNEW.reducerPath]: axiosPostAddContactNEW.reducer,
+        [axiosGetAddAllContactsNEW.reducerPath]: axiosGetAddAllContactsNEW.reducer,
     },
     // middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), pokemonApi.middleware],
 });

@@ -26,7 +26,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 
 //? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
 // import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
-import { useAxiosPostAddContactQuery } from 'services/mockapi_io-api'; 
+import { useAxiosGetAddAllContactsQuery } from 'services/mockapi_io-api'; 
 
 //?________________________________________________
 
@@ -59,13 +59,13 @@ export const App = () => {
 
 //? +++++++++++ with with RTKQery & pokemon.js +++++++++++++++
   // const { data, error: errorPokemon, isLoading: isLoadingPokemon } = useGetPokemonByNameQuery('bulbasaur');
-  // const { data: dataRTKQuery, error: errorPokemonRTKQuery, isLoading: isLoadingPokemonRTKQuery } = useAxiosPostAddContactQuery();
+  // const { data: dataRTKQuery, error: errorPokemonRTKQuery, isLoading: isLoadingPokemonRTKQuery } = useAxiosGetAddAllContactsQuery();
   // console.log("dataRTKQuery:", dataRTKQuery); //!
   // console.log("errorPokemonRTKQuery:", errorPokemonRTKQuery); //!
   // console.log("isLoadingPokemonRTKQuery:", isLoadingPokemonRTKQuery); //!
 
-const { data: contactsRTK } = useAxiosPostAddContactQuery();
-  // const { data: contactsRTK } = useAxiosPostAddContactQuery();
+const { data: contactsRTK } = useAxiosGetAddAllContactsQuery(56);
+  // const { data: contactsRTK } = useAxiosGetAddAllContactsQuery();
   console.log("contactsRTK:", contactsRTK); //!
 //?________________________________________________
 

@@ -6,7 +6,7 @@ import css from 'components/ContactList/ContactList.module.css'
 
 
 
-export const ContactList = ({ visibleContacts, onDeleteTodo }) => (
+export const ContactList = ({ visibleContacts, onDeleteTodo, deleting }) => (
   <ul className={css.ContactList}>
     {visibleContacts.map(({ id, name, number }) => (
       <li
@@ -25,7 +25,7 @@ export const ContactList = ({ visibleContacts, onDeleteTodo }) => (
           className={css.ContactListBtn}
           onClick={() => onDeleteTodo(id)}
         >
-          Delete
+          {deleting ? "Deleting..." : "Delete"}
         </button>
       </li>
     ))}

@@ -118,7 +118,7 @@ export const App = () => {
 
 
   //------------------------------------ DELETE --------------------------------------------
-  const [ deleteContact ] = useDeleteContactMutation();
+  const [ deleteContact, { isLoading: isDeleting } ] = useDeleteContactMutation();
   
   // const handleDeleteContact = async (id) => {
   //     await deleteContact(id).unwrap()
@@ -240,6 +240,7 @@ export const App = () => {
           <ContactList
             visibleContacts={visibleContacts}
             onDeleteTodo={deleteTodo}
+            deleting={isDeleting}
           />
         )}
       </Container>

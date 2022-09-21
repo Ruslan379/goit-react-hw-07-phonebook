@@ -9,10 +9,12 @@ import css from 'components/ContactList/ContactList.module.css'
 
 
 
+
+// export const ContactList = ({ visibleContacts, onDeleteTodo, deleting }) => { //? уже не надо с RTK Query
 export const ContactList = ({ visibleContacts }) => {
 
   const [ deleteContact, { isLoading: isDeleting  } ] = useDeleteContactMutation();
-
+  // const Deleting = "Deleting";
 
   return (
     <ul className={css.ContactList}>
@@ -36,7 +38,7 @@ export const ContactList = ({ visibleContacts }) => {
             disabled={isDeleting}
           >
             {isDeleting ? "Deleting..." : "Delete"}
-            {/* {isDeleting ? <Spinner size= "12">Deleting</Spinner>  : "Delete"} */}
+            {/* {isDeleting ? <Spinner size= "12">{Deleting}</Spinner>  : "Delete"} */}
           </button>
         </li>
       ))}

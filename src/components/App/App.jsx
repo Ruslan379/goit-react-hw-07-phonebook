@@ -75,13 +75,14 @@ export const App = () => {
 //----------------------------------- GET ------------------------------------------
   // const { data: contacts, isFetching: isLoading, error: error} = usegetAddAllContactsQuery();
   // const { data = [], isFetching: isLoading, error } = useGetAddAllContactsQuery(); //! +-+-+-+-
-  const { data = [], isFetching: isLoading, error} = useGetAddAllContactsQuery();
+  const { data = [], isFetching: isLoading, isError, error} = useGetAddAllContactsQuery();
   // console.log("contacts_RTK:", contacts); //!
   // console.log("data:", data); //!
   // console.log("isLoading_RTK:", isLoading); //!
   // const contacts = data; //! +-+-+-+-
   // const error = null;
   // console.log("error_RTK:", error); //!
+  // console.log("isError_RTK:", isError); //!
 
   // useEffect(() => {
     // const addAllСontact =  async (data) => {
@@ -207,7 +208,7 @@ export const App = () => {
         <h2>Contacts</h2>
         <p>Total: {totalContacts}</p>
 
-      {error && (
+      {isError && (
           <div style={{ margin: '0 auto', color: 'red' }}>
             <h1>The request failed:</h1>
             <h2 style={{ textDecoration: "underline", fontStyle: 'italic', color: '#a10000' }}>!!! {error.data}</h2>

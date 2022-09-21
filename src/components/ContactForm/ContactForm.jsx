@@ -9,7 +9,7 @@ import css from 'components/ContactForm/ContactForm.module.css'
 
 
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = ({ onSubmit, addition }) => {
   //! useState ===> name (аналог this.state.name)
   const [name, setName] = useState('');
   //! useState ===> number (аналог this.state.number)
@@ -110,7 +110,7 @@ export const ContactForm = ({ onSubmit }) => {
         <button
           className={css.FormBtn}
           type="submit">
-            Add contact
+            {addition ? "Added contact..." : "Add contact"}
           </button>
         </form>
     );

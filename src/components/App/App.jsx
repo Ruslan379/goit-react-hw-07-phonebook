@@ -103,7 +103,7 @@ export const App = () => {
 
 //--------------------------------- POST ---------------------------------------
   // const [addContact, { isError }] = usePostAddContactMutation();
-  const [addContact] = usePostAddContactMutation();
+  const [addContact, { isLoading: isUpdating }] = usePostAddContactMutation();
   // console.log("isError:", isError); //!
 
   // const handleAddContact = async () => {
@@ -203,7 +203,10 @@ export const App = () => {
 
         <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with RTK Query)</span></h1>
 
-        <ContactForm onSubmit={formSubmitHandler} />
+        <ContactForm
+          onSubmit={formSubmitHandler}
+          addition={isUpdating}
+        />
 
         <h2>Contacts</h2>
         <p>Total: {totalContacts}</p>

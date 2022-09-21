@@ -117,7 +117,7 @@ console.log("contacts_RTK:", contacts); //!
 
 
   //------------------------------------ DELETE --------------------------------------------
-  const [deleteContact, { isLoading: isLoadingDelete, }] = useDeleteContactMutation();
+  const [ deleteContact ] = useDeleteContactMutation();
   
   // const handleDeleteContact = async (id) => {
   //     await deleteContact(id).unwrap()
@@ -220,7 +220,7 @@ console.log("contacts_RTK:", contacts); //!
         />
 
         <br/>
-        {isLoading && isLoadingDelete && <Loader />}
+        {isLoading && <Loader />}
         <br/>
 
         {/* //? ++++++ Временно - для проверки data with RTK Query +++++ */}
@@ -235,7 +235,7 @@ console.log("contacts_RTK:", contacts); //!
         {/* //?________________________________________________ */}
 
 
-        {totalContacts > 0 && !isLoading && !isLoadingDelete &&(
+        {totalContacts > 0 && !isLoading &&(
           <ContactList
             visibleContacts={visibleContacts}
             onDeleteTodo={deleteTodo}

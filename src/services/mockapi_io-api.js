@@ -29,7 +29,7 @@ export async function axiosDeleteContact(id) {
 
 //? +++++++++++ with RTK Query +++++++++++++++
 export const itemsAPIbyRTKQuery = createApi({
-  reducerPath: 'items',
+  reducerPath: 'items ',
   tagTypes: ["Contacts"],
 
   baseQuery: fetchBaseQuery({ baseUrl: 'https://6326c1ee70c3fa390f9bc51d.mockapi.io' }),
@@ -38,6 +38,7 @@ export const itemsAPIbyRTKQuery = createApi({
     getAddAllContacts: builder.query({
       // query: (name) => `/contacts/${name}`,
       query: () => `/contacts`,
+      // providesTags: ["Contacts"],
       providesTags: (result) =>
         result
           ? [
@@ -53,7 +54,8 @@ export const itemsAPIbyRTKQuery = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: 'Contacts', id: 'LIST' }]
+      // invalidatesTags: ["Contacts"],
+      invalidatesTags: [{ type: 'Contacts', id: 'LIST' }],
     }),
 
     deleteContact: builder.mutation({
@@ -61,7 +63,8 @@ export const itemsAPIbyRTKQuery = createApi({
         url: `/contacts/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [{ type: 'Contacts', id: 'LIST' }]
+      // invalidatesTags: ["Contacts"],
+      invalidatesTags: [{ type: 'Contacts', id: 'LIST' }],
     }),
   }),
 })

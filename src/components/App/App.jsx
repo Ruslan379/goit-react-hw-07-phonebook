@@ -75,7 +75,7 @@ export const App = () => {
 //----------------------------------- GET ------------------------------------------
   // const { data: contacts, isFetching: isLoading, error: error} = usegetAddAllContactsQuery();
   // const { data = [], isFetching: isLoading, error } = useGetAddAllContactsQuery(); //! +-+-+-+-
-  const { data = [], isLoading = false, error = null} = useGetAddAllContactsQuery();
+  const { data = [], isFetching: isLoading, error} = useGetAddAllContactsQuery();
   // console.log("contacts_RTK:", contacts); //!
   console.log("data:", data); //!
   console.log("isLoading_RTK:", isLoading); //!
@@ -117,7 +117,7 @@ console.log("contacts_RTK:", contacts); //!
 
 
   //------------------------------------ DELETE --------------------------------------------
-  const [deleteContact] = useDeleteContactMutation();
+  const [deleteContact, { isLoading: isLoadingDelete, }] = useDeleteContactMutation();
   
   // const handleDeleteContact = async (id) => {
   //     await deleteContact(id).unwrap()
@@ -220,7 +220,7 @@ console.log("contacts_RTK:", contacts); //!
         />
 
         <br/>
-        {isLoading && <Loader />}
+        {isLoading && isLoadingDelete && <Loader />}
         <br/>
 
         {/* //? ++++++ Временно - для проверки data with RTK Query +++++ */}
@@ -235,7 +235,7 @@ console.log("contacts_RTK:", contacts); //!
         {/* //?________________________________________________ */}
 
 
-        {totalContacts > 0 && !isLoading && (
+        {totalContacts > 0 && !isLoading && !isLoadingDelete &&(
           <ContactList
             visibleContacts={visibleContacts}
             onDeleteTodo={deleteTodo}

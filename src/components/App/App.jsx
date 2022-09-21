@@ -27,7 +27,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 
 //? +++++++++++ with RTK Query & pokemon.js +++++++++++++++
 // import { useGetPokemonByNameQuery } from 'redux/pokemon'; 
-import { useGetAddAllContactsQuery, usePostAddContactMutation, useDeleteContactMutation } from 'services/mockapi_io-api'; 
+import { useGetAddAllContactsQuery, usePostAddContactMutation, useDeleteContactMutation } from 'redux/items/itemsSliceRTKQuery'; 
 
 //?________________________________________________
 
@@ -77,11 +77,11 @@ export const App = () => {
   // const { data = [], isFetching: isLoading, error } = useGetAddAllContactsQuery(); //! +-+-+-+-
   const { data = [], isFetching: isLoading, error} = useGetAddAllContactsQuery();
   // console.log("contacts_RTK:", contacts); //!
-  console.log("data:", data); //!
-  console.log("isLoading_RTK:", isLoading); //!
+  // console.log("data:", data); //!
+  // console.log("isLoading_RTK:", isLoading); //!
   // const contacts = data; //! +-+-+-+-
   // const error = null;
-  console.log("error_RTK:", error); //!
+  // console.log("error_RTK:", error); //!
 
   // useEffect(() => {
     // const addAllСontact =  async (data) => {
@@ -98,7 +98,7 @@ export const App = () => {
     // addAllСontact(data);
   // }, [data]);
 
-console.log("contacts_RTK:", contacts); //!
+// console.log("contacts_RTK:", contacts); //!
 
 //--------------------------------- POST ---------------------------------------
   // const [addContact, { isError }] = usePostAddContactMutation();

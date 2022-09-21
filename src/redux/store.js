@@ -9,7 +9,7 @@ import { filterSlice } from 'redux/filter/filterSlice';
 
 //? +++++++++++ with RTK Query +++++++++++++++
 // import { pokemonApi } from 'redux/pokemon';
-import { itemsAPIbyRTKQuery } from 'services/mockapi_io-api';
+import { itemsAPIbyRTKQuery } from 'redux/items/itemsSliceRTKQuery';
 
 //?________________________________________________
 

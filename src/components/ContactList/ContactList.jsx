@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useDeleteContactMutation } from 'redux/items/itemsSliceRTKQuery';
 
-// import { Spinner } from 'components/Spinner/Spinner'; 
+import { Spinner } from 'components/Spinner/Spinner'; 
 
 import css from 'components/ContactList/ContactList.module.css' 
 
@@ -35,8 +35,8 @@ export const ContactList = ({ visibleContacts }) => {
             onClick={() => deleteContact(id)}
             disabled={isDeleting}
           >
-            {isDeleting ? "Deleting..." : "Delete"}
-            {/* {isDeleting ? <Spinner size= "12">Deleting</Spinner>  : "Delete"} */}
+            {/* {isDeleting ? "Deleting..." : "Delete"} */}
+            {isDeleting ? [<Spinner size= "18"/>, " Deleting..."] : "Delete"}
           </button>
         </li>
       ))}

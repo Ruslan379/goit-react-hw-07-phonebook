@@ -14,7 +14,7 @@
 
 
 
-/* .ContactListItem {
+.ContactListItem {
   position: relative;
   display: flex;
   align-items: center;
@@ -68,4 +68,4 @@
 .ContactListBtn:hover,
 .ContactListBtn:focus {
   background-color: #be007f;
-} */
+}

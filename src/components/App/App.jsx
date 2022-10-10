@@ -123,19 +123,21 @@ export const App = () => {
           </div>
         )}
 
-        <Filter
+        {contacts.length > 0 &&
+          (<Filter
           value={filter}
           onChange={changeFilter}
-        />
+          />
+        )}
 
         <br/>
         {isLoading && <Loader />}
         <br/>
 
-        {totalContacts > 0 && !isLoading &&(
+        {contacts.length > 0 && !isLoading &&(
           <ContactList
             visibleContacts={visibleContacts}
-            // onDeleteTodo={deleteTodo} //? уже не надо с RTK Query
+            // onDeleteContact={deleteContact} //? уже не надо с RTK Query
             // deleting={isDeleting} //? уже не надо с RTK Query
           />
         )}

@@ -60,14 +60,15 @@ export const App = () => {
   //! Принимаем (name, number) из ContactForm
   //! alert с предупреждением о наявности контакта
   const formSubmitHandler = (name, number) => {
-    if (contacts.find(item => item.name.toLowerCase() === name.toLowerCase())) {
+    if (
+      contacts.find(item => item.name.toLowerCase() === name.toLowerCase())
+    ) {
       toast.warning(`${name} уже есть в контактах.`); 
       return;
-    } else {
+    } 
       const addNewContact = { name, phone: number };
       //! Делаем запрос на добавление контакта из mockapi.io/contacts 
       addContact(addNewContact).unwrap()
-      }
   };
 
 
@@ -104,7 +105,6 @@ export const App = () => {
 // * +++++++++++++++++++++++++++ MARKUP ++++++++++++++++++++++++++++++++++
     return (
       <Container>
-        <ToastContainer autoClose={1500} theme={"colored"} />
 
         <h1>Phonebook HW-7<span style={{ fontSize: "20px" }}> (with RTK Query)</span></h1>
 
@@ -123,24 +123,25 @@ export const App = () => {
           </div>
         )}
 
-        {contacts.length > 0 &&
-          (<Filter
-          value={filter}
-          onChange={changeFilter}
-          />
-        )}
-
-        <br/>
         {isLoading && <Loader />}
-        <br/>
+      
+        {contacts.length > 0 && !isLoading && (
+          <>
+            <Filter
+              value={filter}
+              onChange={changeFilter}
+            />  
 
-        {contacts.length > 0 && !isLoading &&(
-          <ContactList
-            visibleContacts={visibleContacts}
-            // onDeleteContact={deleteContact} //? уже не надо с RTK Query
-            // deleting={isDeleting} //? уже не надо с RTK Query
-          />
+            <ContactList
+              visibleContacts={visibleContacts}
+              // onDeleteContact={deleteContact} //? уже не надо с RTK Query
+              // deleting={isDeleting} //? уже не надо с RTK Query
+            />
+          </>
         )}
+
+        <ToastContainer autoClose={1500} theme={"colored"} />
+
       </Container>
     );
   }
